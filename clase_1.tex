@@ -1,0 +1,79 @@
+%\newcommand{\p}[0]{\mbox{PROP}_{SP}}
+%\newcommand{\cb}[0]{\{ \wedge, \, \lor \, \rightarrow, \, \leftrightarrow \}} 
+%\newcommand{\boox}[0]{\, \Box \,}
+
+\section*{Lógica de proposiciones}
+\begin{definition} Diremos que una \textbf{proposición} es un enunciado que puede ser verdadero o falso. Nunca será una proposición cualquier enunciado que expresa duda o sentimientos. Tampoco lo serán aquellos enunciados que no tengan sentido lógico. 
+\end{definition}
+\paragraph{}
+Un ejemplo de lo que no es proposición sería
+\\
+p $\equiv$ ``Juan se cae'' 
+\\
+q $\equiv$ ``Yo me río''
+\\
+$\varphi \equiv$ Juan se cae y yo me río  
+\paragraph{}
+\textbf{Conectivas lógicas}. Son los símbolos que utilizamos para formalizar las proposiciones. Estos son 
+\[ \lnot \rightsquigarrow \mbox{ negación} \quad \wedge \rightsquigarrow \mbox{ conjunción} \quad 
+\lor \rightsquigarrow \mbox{ disyunción} \quad \rightarrow \rightsquigarrow \mbox{ implicación} \quad
+ \]  
+ \[\leftrightarrow \rightsquigarrow \mbox{ implicación} \quad \bot \rightsquigarrow \mbox{ falso} \quad 
+\top \rightsquigarrow \mbox{ cierto} \]
+
+\begin{definition} Se denomina \textbf{formalizar} una proposición, a escribirla mediante conectivas lógicas. 
+\end{definition}
+\paragraph{}
+\newcounter{ej} %creado el contador ejemplo
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Formalizar las siguientes frases 
+\begin{enumerate}
+	\item Si llueve se suspende el partido. 
+	\item Solo si llueve se suspende el partido.
+\end{enumerate}
+tomando como proposiciones p $\equiv$ `` Llueve'' y q $\equiv$ ``se suspende el partido''.
+\begin{itemize}
+	\item[(1)] $ p\rightarrow q$
+	\item[(2)] $ q\rightarrow p$
+\end{itemize} 
+\paragraph{}
+\begin{definition} Llamaremos \textbf{formula} a una cadena de símbolos.
+\end{definition}
+
+\begin{definition} Denotamos el \textbf{conjunto de} todos los \textbf{símbolos de proposición} como 
+	\[ \mbox{SP}=\{p, \, q, \ldots \} \]
+	que es un conjunto numerable (no necesariamente finito). 
+\end{definition}
+
+\begin{definition} Al conjunto formado por SP y las conectivas lógicas se le denomina \textbf{alfabeto} y lo denotamos como 
+	\[ \mbox{A}= \mbox{SP} \cup \{ \lnot, \, \wedge, \, \lor \, \rightarrow, \, \leftrightarrow, \, (, \, ) \} \]
+	denotamos por $\mbox{A}^*$ al \textbf{conjunto de cadenas de símbolos} de A
+	\[ \mbox{A}^*=\{ \varepsilon, \, a_1, \, a_2, \ldots , a_n : a_n \geq 0,\, a_i \in A,\, 1 \leq j \leq n   \} \]
+	donde $\varepsilon$ es la cadena vacía. 
+\end{definition}
+
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Dado el vocabulario $\mbox{A}=\{ a, \,b \}$ su conjunto de cadena de símbolos será el conjunto 
+\[ \mbox{A}^*= \{\varepsilon, \, a, b, ab, ba, aaa, aab, \ldots \} \]
+\begin{definition} Dado SP un conjunto de símbolos de proposición, tomamos el alfabeto $\mbox{A}_{SP}$ y definimos $\mbox{PROP}_{SP}$ como el menor subconjunto de $\mbox{A}^*_{SP}$ que verifica 
+\begin{enumerate}
+	\item $SP \subseteq \mbox{PROP}_{SP}$
+	\item Si $\varphi \in \p$, entonces $(\lnot \varphi) \in \p$
+	\item Si $\varphi, \psi \in \p$, entonces $(\varphi \, \Box \, \psi) \in \p$, donde \[ \Box \in \cb \] 
+\end{enumerate}
+\end{definition}
+Veamos como se construye esta definición. Sean 
+\[ P_0 = \mbox{SP} \]
+\[ P_{n+1}= P_n \cup \{(\lnot \varphi), \, (\varphi \, \Box \, \psi) : \, \Box \in \cb, \, \varphi, \psi \in P_n \} \]
+\[ P= \bigcup_{i \geq 0} \]
+veamos como $P$ cumple las propiedades 1, 2 y 3 de la definición anterior. De forma trivial se verifica que $\p \subseteq P$ y nos faltaría por demostrar la inclusión en el otro sentido. 
+\begin{proof}
+Sea $\varphi \in P$ entonces $\exists k$ tal que $\varphi \in P_k$ y aplicamos inducción sobre $k$ para ver que $\varphi \in \p$. 
+\paragraph{}
+Para $k=0$, por la propiedad 1 de la definición se tienen que $\varphi \in \p$. Para $k \geq 0$ 
+\begin{itemize}
+	\item[(i)] $\varphi \in P_{k-1}$
+	\item[(ii)] $\psi \in P_{k-1}$ tal que $\varphi = (\lnot \psi)$
+	\item[(iii)] $\psi_1, \psi_2 \in P_{k-1}$ entonces $\varphi = (\psi_1 \boox \psi_2)$
+\end{itemize}
+\end{proof}

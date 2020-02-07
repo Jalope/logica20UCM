@@ -1,0 +1,80 @@
+\subsection*{Inducción estructural}
+Supongamos que queremos probar una propiedad $P$ que cumpla $P(\varphi), \forall \varphi \in \p$. Para ello vamos a usar una estructura basada en el \textit{método de inducción} usual sobre $\mathbb{N}$ aplicado sobre las proposiciones. El método tiene la siguiente estructura 
+\begin{itemize}
+	\item[(1)] Demostrar la \textbf{base inductiva}. Lo haremos sobre las atómicas (\textit{i.e.} SP, $\bot, \top$)
+	\begin{itemize}
+		\item[(AT)] Se cumple $P(\varphi), \forall \varphi \in \mbox{AT}$.
+	\end{itemize}
+	\item[(2)] \textbf{Paso inductivo}. Una vez que tenemos la propiedad $P$ probada para el caso base, suponemos la cierta la hipótesis de inducción, es decir que se cumple $P(\varphi),$ y la utilizamos para los dos casos siguientes
+	\begin{itemize}
+		\item[$(\lnot \varphi)$] Utilizando la \textit{h.i.} demostraremos que se cumple $P((\lnot \varphi))$.
+		\item[($\Box$)] Suponemos que $\varphi_1$ cumple $P$ y que $\varphi_2$ cumple $P$, es decir, se verifican $P(\varphi_1)$ y $P(\varphi_2)$ y entonces hay que demostrar $P(\varphi_1 \boox \varphi_2)$ con $\Box \in \cb$. Dependiendo de la propiedad que queramos demostrar, podremos, o bien agrupar la conectivas lógicas en un sólo caso, o bien separarlas de forma en casos particulares. 
+	\end{itemize}
+\end{itemize} 
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Vamos a demostrar por inducción estructural la siguiente propiedad
+\begin{center}
+P: \textit{Toda fórmula tiene el mismo número de paréntesis abiertos y cerrados}
+\end{center}
+Para ello, vamos a denotar $\vert \varphi \vert_{(}$ al número de paréntesis abiertos de $\varphi$ y, análogamente, denotamos $\vert \varphi \vert_{)}$ al número de paréntesis cerrados de $\varphi$.
+\paragraph{}
+\begin{itemize}
+	\item[(AT)] Si $\varphi \in SP$ ó $\varphi=\bot$ ó $\varphi=\top$, en cualquiera de los casos no hay paréntesis, luego $\vert \varphi \vert_{(}=\vert \varphi \vert_{)}$ y por tanto se verifica
+	\[ P(\varphi), \forall \varphi \in \mbox{AT} \]
+	\item[$(\lnot \varphi)$] Sea $\varphi \in \p$ tal que se verifica $P(\varphi)$, es decir 
+	\[ \vert \varphi \vert_{(}=\vert \varphi \vert_{)} \]
+	ahora, el $\vert (\lnot \varphi) \vert_{(}= \vert \varphi \vert_{(} +1$ y analogamente $\vert (\lnot \varphi) \vert_{)}= \vert \varphi \vert_{)} +1$, luego por \textit{h.i.} se tiene que 
+	\[ \vert (\lnot \varphi) \vert_{)}=\vert (\lnot \varphi) \vert_{(}  \]  
+	luego se verifica $P(\lnot \varphi), \forall \varphi \in \p$.
+	\item[($\Box$)] Sean $\varphi_1, \, \varphi_2 \in \p$, supongamos que
+	\[ \mbox{Se verifica } P(\varphi_1) \Rightarrow \vert \varphi_1 \vert_{(}=\vert \varphi_1 \vert_{)}  \]
+	\[ \mbox{Se verifica } P(\varphi_2) \Rightarrow \vert \varphi_2 \vert_{(}=\vert \varphi_2 \vert_{)}  \]  
+	y veamos que ocurre con $P(\varphi_1 \boox \varphi_2)$ 
+	\[ \vert \varphi_1 \boox \varphi_2 \vert_{(}= \vert \varphi_1 \vert_{(} + \vert \varphi_2 \vert_{(} +1  \]
+	\[ \vert \varphi_1 \boox \varphi_2 \vert_{)}= \vert \varphi_1 \vert_{)} + \vert \varphi_2 \vert_{)} +1  \]
+	y, por \textit{h.i.} se tiene que  
+	\[ \vert \varphi_1 \boox \varphi_2 \vert_{)}= \vert \varphi_1 \boox \varphi_2 \vert_{(} \]
+	finalizando así la demostración.
+\end{itemize}
+
+\begin{definition} Sea A un alfabeto y $\omega \in A^*$ decimos que $\omega'$ es \textbf{prefijo} de $\omega$ si $\exists \omega''$ tal que 
+\[ \omega=\omega' \omega'' \]
+con, $\omega=a_1 \ldots a_n$, entonces $\exists k, \, 0\leq k \leq n$ tal que $\omega'=a_1 \ldots a_k$. Diremos que $\omega'$ es \textbf{prefijo propio} si $\omega'=\neq \varepsilon$ y $\omega'=\neq \omega$. 
+\end{definition}
+
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Sea $A=\{ a,\,b \}$ y $\omega=aababb$ entonces 
+\begin{multicols}{2}
+\begin{itemize}
+	\item Si $k=0 \Rightarrow \omega'=\varepsilon$
+	\item Si $k=1 \Rightarrow \omega'=a$
+	\item Si $k=2 \Rightarrow \omega'=aa$
+	\item Si $k=3 \Rightarrow \omega'=aab$
+	\item Si $k=4 \Rightarrow \omega'=aaba$
+	\item Si $k=5 \Rightarrow \omega'=aabab$
+	\item Si $k=5 \Rightarrow \omega'=\omega$		
+\end{itemize}
+\end{multicols}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Sea $\varphi'$ prefijo propio de $\varphi$, vamos a probar por inducción estructural la propiedad 
+\begin{center}
+P: \textit{El número de paréntesis cerrados de $\varphi'$ es menor que el número de paréntesis abiertos}.
+\end{center}
+utilizando la notación del ejemplo (III).
+\begin{itemize}
+	\item[(AT)] Sea $\varphi \in SP$, supongamos $\varphi=p$ entonces, o bien $\varphi'=\epsilon$ o $\varphi'=p$ luego $\varphi$ no tiene prefijos propios de modo que se cumple la propiedad. Si $\varphi=\bot$ o $\varphi = \top$ de nuevo $\varphi'=\epsilon$ o $\varphi'=\bot$ o $\varphi'=\top$ que no son prefijos propios, luego $\varphi$ tampoco tiene prefijos. 
+	\[ P(\varphi), \forall \varphi \in \mbox{AT} \]
+	\item[($\lnot \varphi$)] Supongamos que $\varphi'$ es prefijo propio de $(\lnot \varphi)$, y supongamos que todo prefijo propio de $\varphi$ cumple la propiedad. 
+	\begin{itemize}
+		\item[(CASO 1)] Si $\varphi'=($, entonces $\vert \varphi' \vert_{(}=1 > \vert \varphi' \vert_{)}=0$
+		\item[(CASO 2)] Si $\varphi'=(\lnot$, entonces $\vert \varphi' \vert_{(}=1 > \vert \varphi' \vert_{)}=0$
+		\item[(CASO 3)] Si $\varphi'=(\lnot \varphi''$, siendo $\varphi''$ prefijo de $\varphi$ luego cumple la propiedad, si además le sumamos uno la cumple también. 
+		\item[(CASO 4)] Si $\varphi'=(\lnot \varphi$, entonces $\vert \varphi' \vert_{(}=1 = \vert \varphi' \vert_{)}=0 $
+\end{itemize}	 
+ \item[($\Box$)] Supongamos que todo prefijo propio de $\varphi_1$,  $\varphi_2$ cumple la propiedad. Hay que ver entonces, que los prefijos lo cumplen 
+ \[(, \, (\varphi_1, \, \varphi_1, \, \varphi_1 \boox, \, (\varphi_1 \boox \varphi_2', \, (\varphi_1 \boox \varphi_2  \]
+ \begin{flushright}
+ \textit{Se deja como ejercicio}.
+ \end{flushright}
+\end{itemize}
+
