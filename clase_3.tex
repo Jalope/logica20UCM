@@ -1,0 +1,39 @@
+\subsection*{Definiciones recursivas}
+Supongamos que queremos definir una función 
+\[ H: \p \rightarrow A \]
+donde $A$ puede tomar diferentes tipos de conjunto: $\mathbb{N}$, $\mathcal{P}(\p)$,... para hacerlo de forma recursiva, vamos a necesitar las siguientes funciones auxiliares
+\begin{itemize}
+	\item Caso atómico
+	\[ H_{\mbox{AT}}: \mbox{AT} \rightarrow A \]
+dada por $H(\varphi)=H_{\mbox{AT}}(\varphi), \forall \varphi \in \mbox{AT}$
+	\item Paso recursivo: donde diferenciamos entre la negación y las conectivas binarias. 
+	\begin{itemize}
+		\item[(i)] Negación 
+		\[ H_{\lnot}: A \rightarrow A \]
+		dada por 
+	\[ H \vert (\lnot \varphi) \vert = H_{\lnot}\vert (H(\varphi) \vert \]
+		\item[(ii)] Conectivas binarias 
+		\[ H_{\Box}: A \times A \rightarrow A \]
+		dada por 
+	\[ H \vert (\varphi_1 \boox \varphi_2) \vert = H_{\Box}\vert (H(\varphi_1, \, \varphi_2) \vert \]
+	\end{itemize}
+\end{itemize} 
+En los casos (i) e (ii) ni la entrada ni la salida de la función está formada por formulas. 
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Si queremos definir de forma recursiva el número de paréntesis abiertos de una proposición
+\[ H_{(}: \p \rightarrow \mathbb{N} \] 
+se tendría
+\[ H_{\mbox{AT}\,(}: \mbox{AT} \rightarrow \mathbb{N} \]
+dada por
+\[ H_{\mbox{AT}\,(}(\varphi)=0, \forall \varphi \in \mbox{AT} \]
+la negación
+\[ \begin{matrix}
+ H_{\lnot}: & \mathbb{N} & \rightarrow & \mathbb{N}\\
+ &n& \longmapsto &  n+1
+\end{matrix} \] 
+finalmente, el resto de conectivas 
+\[ \begin{matrix}
+ H_{\Box}:  & \mathbb{N} \times \mathbb{N} & \rightarrow & \mathbb{N}\\
+ &(n,\, m)& \longmapsto &  n+m+1
+\end{matrix} \] 
