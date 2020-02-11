@@ -29,11 +29,68 @@ dada por
 \[ H_{\mbox{AT}\,(}(\varphi)=0, \forall \varphi \in \mbox{AT} \]
 la negación
 \[ \begin{matrix}
- H_{\lnot}: & \mathbb{N} & \rightarrow & \mathbb{N}\\
+ H_{\lnot \,(}: & \mathbb{N} & \rightarrow & \mathbb{N}\\
  &n& \longmapsto &  n+1
 \end{matrix} \] 
 finalmente, el resto de conectivas 
 \[ \begin{matrix}
- H_{\Box}:  & \mathbb{N} \times \mathbb{N} & \rightarrow & \mathbb{N}\\
+ H_{\Box \,(} :  & \mathbb{N} \times \mathbb{N} & \rightarrow & \mathbb{N}\\
  &(n,\, m)& \longmapsto &  n+m+1
 \end{matrix} \] 
+Escribirlo así es un poco farragoso por lo que, generalmente, escribiremos las funciones haciendo uso del propio concepto de recursión
+\[ H_{(}(\varphi)=0, \forall \varphi \in \mbox{AT} \]
+\[ H_{\lnot \,(}((\neg \varphi))=H_{(}(\varphi) +1 \]
+\[ H_{\Box \,(}(\varphi_1 \boox \varphi_2)= H_{(}(\varphi_1)+H_{(}(\varphi_2)+1 \]
+además, en la escritura, se suprime la función auxiliar. 
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: definiremos de forma recursiva el número de apariciones de $\wedge$ en $\varphi$ y lo denotamos como $\vert \varphi \vert^{\wedge}$.
+\begin{itemize}
+	\item[(AT)] $\vert \varphi \vert^{\wedge}=0, \forall \varphi \in \mbox{AT}$
+	\item[($\neg$)] $\vert (\neg \varphi) \vert^{\wedge}=\vert \varphi \vert^{\wedge}$
+	\item[($\Box$)] Hay que diferenciar dos casos
+	\[ \vert (\varphi_1 \boox \varphi_2) \vert^{\wedge}= \left\lbrace \begin{matrix}
+	\vert \varphi_1 \vert^{\wedge}+\vert \varphi_2 \vert^{\wedge}& \mbox{si}& \Box \in \{ \lor, \, \rightarrow, \, \leftrightarrow\}\\
+	\\
+	\varphi_1 \vert^{\wedge}+\vert \varphi_2 \vert^{\wedge}+1 & \mbox{si}& \Box=\wedge
+\end{matrix} \right.	 \] 
+\end{itemize}
+\begin{definition} Dadas dos fórmulas $\varphi$ y $\psi$ decimos que $\psi$ es una \textbf{subformula} de $\varphi$ si una parte de $\varphi$ formada por símbolos consecutivos es idéntica a $\psi$.
+\end{definition}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: dada la formula, 
+\[ \varphi \equiv (p \lor (q \rightarrow (\neg r))) \]
+observamos que esta formada por las subformulas siguientes
+\[ p, \, q, \, r \, (\neg r), \, (q \rightarrow (\neg r)), \varphi \]
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Creamos una función recursiva que devuelva las diferentes subformulas de una formula dada.
+\[ \mbox{SUB}: \p \rightarrow \mathcal{P}(\p) \]
+dada por 
+\begin{itemize}
+	\item[(AT)] $\mbox{SUB}(\varphi)=\{\varphi \}, \forall \varphi \in \mbox{AT}$
+	\item[($\neg$)] $\mbox{SUB}((\neg \varphi))=\{ (\neg\varphi)\} \cup \mbox{SUB}(\varphi)$
+	\item[($\Box$)] $ \mbox{SUB} ((\varphi_1 \boox \varphi_2) )= \mbox{SUB}(\varphi_1)+\mbox{SUB}(\varphi_2) \cup \{ (\varphi_1 \boox \varphi_2) \}$
+\end{itemize}
+\begin{prop} El esquema de definición recursiva da como resultado una única función. Esto es, dadas 
+\[ H_{\mbox{AT}}: \mbox{AT} \rightarrow A \]
+\[ H_{\lnot}: A \rightarrow A \]
+\[ H_{\Box}: A \times A \rightarrow A \]
+existe una única función $H: \p \rightarrow A$ que verifica 
+\[ H(\varphi)=H_{\mbox{AT}}(\varphi), \forall \varphi \in \mbox{AT} \]
+\[H((\neg \varphi))=H_{\neg}(H (\varphi))\]
+\[H ( (\varphi_1 \boox \varphi_2) ) = H_{\Box}(H(\varphi_1, \, \varphi_2))\]
+\end{prop}
+\subsection*{Eliminación de paréntesis}
+Como en la aritmética básica, cuando escribimos una operación podemos utilizar las reglas de prioridad, asociatividad, etc. para escribir el menor número de paréntesis posible. Así por ejemplo en 
+\[ (((2 \cdot 3)+5)-(3 \cdot 2))=2 \cdot 3 +5-3\cdot 3 \]
+la idea es, por tanto, dar una serie de reglas para poder hacer lo mismo con nuestras formulas de proposición. 
+\subsubsection*{Reglas de eliminación de paréntesis}
+\begin{enumerate}
+	\item \textbf{Elminación de paréntesis externos}. No aportan información.
+	\item \textbf{Prioridad entre conectivas}. En la siguiente lista, las conectivas, aparecen de más prioridad a menos
+	\[ (+)\quad \neg, \, \wedge, \, \lor, \, \rightarrow, \, \leftrightarrow \quad (-) \]
+	\item \textbf{Asociatividad}. Adoptamos el convenio de asociar por la izquierda. De este modo si tenemos $p \rightarrow q \rightarrow r$ daremos como asociación válida 
+	\[ (p \rightarrow q) \rightarrow r \]
+	siendo, por tanto, errónea 
+	\[ p \rightarrow (q \rightarrow r)  \]
+	Esto mismo se aplica para $\leftrightarrow$. En los casos de $\vee$ y $\wedge$ no se presenta problema pues son asociativas.
+\end{enumerate}
