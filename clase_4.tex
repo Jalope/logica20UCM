@@ -1,0 +1,84 @@
+\subsection*{Valoraciones: Tablas de verdad}
+Todo lenguaje se subdivide en 
+\begin{enumerate}
+	\item Sintaxis: reglas de formación de las frases o fórmulas. 
+	\item Semántica: significado de las frases o fórmulas. 
+\end{enumerate}
+de este modo, se conforma un lenguaje formal. 
+
+\begin{definition} Denotaremos por $\mbox{BOOL}$ al conjunto formado por dos elementos\footnote{Durante este curso elegimos, generalmente, como notación para el conjunto BOOL $=\{$V, F$\}$.} 
+\[ \mbox{BOOL}= \{\mbox{Verdadero}, \mbox{ Falso} \}=\{\mbox{V}, \mbox{ F} \}=\{\mbox{T}, \mbox{ F} \}=\{1,\, 0\} \]
+con los que vamos a \textit{valorar} las fórmulas. 
+\end{definition}
+
+Para dar un sentido más formal a la idea de \textit{valorar}, vamos a construir una serie de aplicaciones sobre el conjunto BOOL en la siguiente definición. 
+\begin{definition} Diremos que una \textbf{valoración} es una aplicación de la forma 
+\[ \begin{matrix}
+v: & \mbox{SP} & \rightarrow &\mbox{BOOL}\\
+\end{matrix} \]
+cuya extensión da lugar a 
+\[ \begin{matrix}
+\widehat{v}: & \p & \rightarrow &\mbox{BOOL}\\
+&\varphi &  \mapsto & \widehat{v}(\varphi)
+\end{matrix} \]
+que definiremos de forma recursiva
+\begin{itemize}
+	\item[(AT)] $\widehat{v}(\top)=V$, $\widehat{v}(\bot)=F$, $\widehat{v}(p)=v(p), \mbox{ si } p \in \mbox{SP}$
+	\item[($\neg$)] $\widehat{v}(\neg)=v_{\neg}(\widehat{v}(\varphi))$
+	\item[($\Box$)] $\widehat{v}((\varphi \boox \psi))= v_{\Box}(\widehat{v}(\varphi), \, \widehat{v}(\psi))$ con $\Box \in \cb$
+\end{itemize}
+\end{definition}
+
+Estas funciones de valoración dan lugar a las tablas de verdad de cada una de las conectivas lógicas. 
+\paragraph{}
+Las aplicaciones son
+\[ \begin{matrix}
+v_{\Box}: & \mbox{BOOL}\times \mbox{BOOL} & \rightarrow &\mbox{BOOL}\\
+\end{matrix} \]
+si $\Box \in \cb$
+En el caso de la negación
+\[ \begin{matrix}
+v_{\neg}: & \mbox{BOOL} & \rightarrow &\mbox{BOOL}\\
+\end{matrix} \]
+\begin{table}[]
+\centering
+\begin{tabular}{ccccc|ccccc|ccccc|ccccc|ccc}
+\multicolumn{4}{c}{$p \wedge q$}                                                                      &  & \multicolumn{4}{c}{$p \lor q$}                                                                      &  & \multicolumn{4}{c}{$p \rightarrow q$}                                                                     &  & \multicolumn{4}{c}{$p \leftrightarrow q$}                                                                     &  & \multicolumn{3}{c}{$\neg p$}                                                 \\ \hline
+                                        &                                   & p          &            &  &                                         &                                 & p          &            &  &                                         &                                        & p          &            &  &                                         &                                            & p          &            &  &                                         &                                 &   \\ \cline{3-4} \cline{8-9} \cline{13-14} \cline{18-19}
+                                        & \multicolumn{1}{c|}{$v_{\wedge}$} & \textbf{V} & \textbf{F} &  &                                         & \multicolumn{1}{c|}{$v_{\lor}$} & \textbf{V} & \textbf{F} &  &                                         & \multicolumn{1}{c|}{$v_{\rightarrow}$} & \textbf{V} & \textbf{F} &  &                                         & \multicolumn{1}{c|}{$v_{\leftrightarrow}$} & \textbf{V} & \textbf{F} &  &                                         & \multicolumn{1}{c|}{$v_{\neg}$} &   \\ \cline{2-4} \cline{7-9} \cline{12-14} \cline{17-19} \cline{22-23} 
+\multicolumn{1}{c|}{\multirow{2}{*}{q}} & \multicolumn{1}{c|}{\textbf{V}}   & V          & F          &  & \multicolumn{1}{c|}{\multirow{2}{*}{q}} & \multicolumn{1}{c|}{\textbf{V}} & V          & V          &  & \multicolumn{1}{c|}{\multirow{2}{*}{q}} & \multicolumn{1}{c|}{\textbf{V}}        & V          & F          &  & \multicolumn{1}{c|}{\multirow{2}{*}{q}} & \multicolumn{1}{c|}{\textbf{V}}            & V          & F          &  & \multicolumn{1}{c|}{\multirow{2}{*}{p}} & \multicolumn{1}{c|}{\textbf{V}} & F \\
+\multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{\textbf{F}}   & F          & F          &  & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{\textbf{F}} & V          & F          &  & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{\textbf{F}}        & V          & V          &  & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{\textbf{F}}            & V          & V          &  & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{\textbf{F}} & V
+\end{tabular}
+\end{table}
+
+Donde encontremos matrices simétricas, podemos decir que ese operador es conmutativo. Los operadores que conmutan son: la disyunción y la conjunción.
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: utilizando las aplicaciones de la definición (10), vamos a valor la fórmula 
+\[ \varphi= (q \lor r) \rightarrow (q \rightarrow r) \]
+partiendo de las valoraciones 
+\[v(p)=V, \quad v(q)=F, \quad v(r)=V \]
+\[ \widehat{v}= v_{\rightarrow}(\widehat{v}(q \lor r), \widehat{v}(p \rightarrow q)) =  v_{\rightarrow}(v_{\lor}(\widehat{v}(q), \widehat{v}(r)), v_{\rightarrow}(\widehat{v}(p), \widehat{v}(q))= \]
+\[ =v_{\rightarrow}(v_{\lor}(F,V), v_{\rightarrow}(V,F))= v_{\rightarrow}(V,F)=F \]
+
+Es claro que no es un método muy óptimo si queremos ver todas las posibles valoraciones de las proposiciones que formen parte de la fórmula. Para ello se utiliza la tabla de verdad. 
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Completar la tabla de verdad de la fórmula $\varphi$ del ejemplo anterior. (\textit{Se deja como ejercicio)}.
+
+\begin{definition} Dada $v: \mbox{SP} \rightarrow \mbox{BOOL}$ valoración y $\varphi \in \p$, $v$ \textbf{satisface} $\varphi$ si y sólo si $\widehat{v}(\varphi)=V$; y denotamos $v \models \varphi$. En caso contrario, $v$ no satisface $\varphi$, si $\widehat{v}(\varphi)=F$, denotamos $v \not\models \varphi$. Al símbolo $\models$ se le denomina \textbf{símbolo de satisficidad}.
+\end{definition}
+
+\subsubsection*{Clasificación de fórmulas}
+\begin{definition} Según como sean las valoraciones de una fórmula, podemos clarificarlas en
+\begin{enumerate}
+	\item \textbf{Satisfactible}. Existe alguna valoración $v$ tal que $v \models \varphi$.
+	\item \textbf{Tautología}. Siempre es cierto, es decir, $\forall v$ se tiene que $v \models \varphi$.
+	\item \textbf{Contingencia}. $\varphi$ se dice contingencia si es satisfactible, pero no tautología. 
+	\item \textbf{Contradicción}. Siempre es falso, es decir, $\forall v$ se tiene que $v \not \models \varphi$.
+\end{enumerate}
+\end{definition}
+\paragraph{}
+\newcounter{obs} %creado el contador ejemplo
+\addtocounter{obs}{1} % sumo 1
+\textbf{Observación}. Todas las valoraciones posibles que hay en una fórmula viene dado por $2^{\rho}$ donde $\rho$ es el número de proposiciones que tiene la fórmula.
