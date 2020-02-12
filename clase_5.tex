@@ -1,0 +1,40 @@
+%\addtocounter{ej}{1} % sumo 1
+%\textbf{Ejemplo \Roman{ej}}:
+\begin{definition} Sea $\Phi \subseteq \p$ un conjuntos de fórmulas, definimos 
+\[ \Mod (\Phi)= \{ v / v \models \varphi, \forall \varphi \in \Phi \} \]
+entonces diremos que 
+\begin{enumerate}
+	\item $\Phi$ es \textbf{satisfactible}, si $\Mod (\Phi) \neq \emptyset$ y denotamos $\mbox{Sat}(\Phi)$
+	\item $\Phi$ es \textbf{insatisfactible}, si $\Mod (\Phi) = \emptyset$ y denotamos $\mbox{Insat}(\Phi)$
+	\item $\varphi \in \p$ es \textbf{consecuencia lógica} de $\Phi$ si y sólo si $\Mod (\Phi) \subseteq\Mod (\{\varphi \})$, denotamos $\Phi \models \varphi$.
+\end{enumerate} 
+\end{definition}
+\paragraph{}
+\addtocounter{obs}{1}
+\textbf{Observación}: si partimos de una premisa falsa podemos concluir cualquier cosa. Esto es 
+\[ \mbox{Insat}(\Phi) \mbox{ entonce } \Phi \models \varphi \]
+además, podemos expresar una tautología como 
+\[ \mbox{Si } \Phi \neq \emptyset \mbox{ y } \Phi \models \varphi \mbox{ entonce } \models \varphi \]
+En este sentido se pueden definir todo tipo de propiedades, como las que vienen a continuación. 
+
+\begin{prop} Se tiene que 
+\begin{enumerate}
+	\item $\Phi \cup \{ \varphi \} \models \psi$ si y sólo si $\Phi \models \varphi \rightarrow \psi$
+	\item $\Phi \models \varphi$ si y sólo si $\textrm{Insat}(\Phi \cup \{\varphi\})$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+Vamos a demostrar el apartado (1) (\textit{el (2) queda como ejercicio}. Comenzamos con la implicación hacía la derecha. 
+
+Supongamos que $\Phi \cup \{\varphi\} \models \psi$ y hay que ver si $\Mod (\Phi) \subseteq \Mod (\varphi \rightarrow \psi)$. Si $v \in \Mod (\Phi)$ entonces 
+\begin{itemize}
+	\item[(i)] $\widehat{v}(\varphi)=V \Rightarrow v \in \Mod(\varphi) \Rightarrow v \in \Mod (\Phi \cup\{\varphi\} \Rightarrow v \in \Mod (\psi) \Rightarrow \widehat{v}(\psi)=V$ de modo que $\widehat{v}(\varphi \rightarrow \psi)=V$ en consecuencia $v \in \Mod (\varphi \rightarrow \psi)$.
+	\item[(ii)] $\widehat{v}(\varphi)=F$, entonces $\widehat{v}(\varphi \rightarrow \psi)=V \Rightarrow v \in \Mod (\varphi \rightarrow \psi)$ 
+\end{itemize}
+
+Para la implicación en el otro sentido. Si $v \in \Mod(\Phi \cup \{ \varphi \})$ entonces 
+\[ \left. \begin{matrix}
+v \in \Mod (\Phi) &\Rightarrow & v \in \Mod (\varphi \rightarrow \psi) &\Rightarrow & \widehat{v}(\varphi \rightarrow \psi)=V\\
+v \in \Mod (\varphi) &\Rightarrow & \widehat{v}(\varphi)=V
+\end{matrix} \right \rbrace \Rightarrow \widehat{v}(\psi)=V \Rightarrow v \in \Mod(\psi) \] 
+\end{proof}

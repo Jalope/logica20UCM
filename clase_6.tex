@@ -1,0 +1,86 @@
+\subsection{Equivalencias lógicas}
+Acabamos de ver en la \textit{proposición 2} que podemos escribir propiedades acerca de un conjunto de proposiciones. Pero, de momento, los métodos que disponemos para demostrar este tipo de propiedades no siempre son los más óptimos. Veamoslo en con el siguiente ejemplo.
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: a través de una tabla de verdad, partiendo de 
+\[ \Phi=\{ \neg p \wedge q \rightarrow r,\, \neg p,\, \neg r \} \]
+\[ \varphi= \neg q\]
+hay que demostrar que 
+\[ \Phi \models \varphi \]
+Para la tabla coloreamos en rojo las premisas que deben satisfacer la consecuencia, pintada de azul. Satisfacer implica que la valoración debe ser V en todas las premisas. Esta situación sólo se da para las valoraciones $p, \, q$ y $r$ todas ellas F (fila señalada con una flecha). 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lc|c|c|c|c|c|c||c}
+\cline{2-9}
+                  & \textbf{p} & \textbf{q} & \textbf{r} & {\color[HTML]{FE0000} \textbf{$\neg p$}} & \textbf{$\neg p \wedge q$} & {\color[HTML]{FE0000} \textbf{$\neg p \wedge q \rightarrow r$}} & {\color[HTML]{FE0000} \textbf{$\neg r$}} & {\color[HTML]{3531FF} \textbf{$\neg q$}} \\ \cline{2-9} 
+                  & \textbf{V} & \textbf{V} & \textbf{V} & F                                        & F                          & {\color[HTML]{32CB00} V}                                        & F                                        & F                                        \\ \cline{2-9} 
+                  & \textbf{V} & \textbf{V} & \textbf{F} & F                                        & F                          & {\color[HTML]{32CB00} V}                                        & {\color[HTML]{32CB00} V}                 & F                                        \\ \cline{2-9} 
+                  & \textbf{V} & \textbf{F} & \textbf{V} & F                                        & F                          & {\color[HTML]{32CB00} V}                                        & F                                        & V                                        \\ \cline{2-9} 
+                  & \textbf{V} & \textbf{F} & \textbf{F} & F                                        & F                          & {\color[HTML]{32CB00} V}                                        & {\color[HTML]{32CB00} V}                 & V                                        \\ \cline{2-9} 
+                  & \textbf{F} & \textbf{V} & \textbf{V} & {\color[HTML]{32CB00} V}                 & V                          & {\color[HTML]{32CB00} V}                                        & F                                        & F                                        \\ \cline{2-9} 
+                  & \textbf{F} & \textbf{V} & \textbf{F} & {\color[HTML]{32CB00} V}                 & V                          & F                                                               & {\color[HTML]{32CB00} V}                 & F                                        \\ \cline{2-9} 
+                  & \textbf{F} & \textbf{F} & \textbf{V} & {\color[HTML]{32CB00} V}                 & F                          & {\color[HTML]{32CB00} V}                                        & F                                        & V                                        \\ \cline{2-9} 
+$\longrightarrow$ & \textbf{F} & \textbf{F} & \textbf{F} & {\color[HTML]{32CB00} V}                 & F                          & {\color[HTML]{32CB00} V}                                        & {\color[HTML]{32CB00} V}                 & V                                        \\ \cline{2-9} 
+\end{tabular}
+\end{table}
+
+puesto que la consecuencia es también verdadera, hemos demostrado que $\Phi \models \varphi$. 
+\paragraph{}
+Esta forma no es efectiva y vamos a dar mecanismos para no tener que hacer uso de valoraciones y tablas de verdad. 
+
+\begin{definition} Sean $\varphi, \, \psi \in \p $ son \textbf{lógicamente equivalentes} y lo denotamos como $\varphi \sim \psi$, si y sólo si $\forall v, \widehat{v}(\varphi)=\widehat{v}(\psi)$.
+\end{definition}
+
+\begin{lemma}
+Diremos que $\sim$ es una \textbf{relación de equivalencia}; más aún, es una congruencia respecto a dos operadores lógicos (\textit{i.e.} la relación se respeta con los operadores lógicos). 
+\[ \left. \begin{matrix}
+\varphi \sim \psi & \varphi_1 \sim \varphi'_1\\
+\neg \varphi \sim \neg \psi & \varphi'_2 \sim \varphi_2 
+\end{matrix} \right \rbrace  \Rightarrow \quad \varphi_1 \boox \varphi_2 \sim \varphi'_1 \boox \varphi'_2\]
+con $\Box \in \cb$.
+\end{lemma}
+
+\subsubsection{Leyes de equivalencia lógica}
+\begin{enumerate}
+	\item \textbf{Conmutatividad}
+	\[ p \wedge q \sim q \wedge p \]
+	\[ p \lor q \sim q \lor p \]
+	\item \textbf{Asociatividad}
+	\[ p \wedge (q \wedge r) \sim (p \wedge q) \wedge r \]
+	\[ p \lor (q \lor r) \sim (p \lor q) \lor r \]
+	\item \textbf{Idempotencia}
+	\[ p \wedge p \sim p\]
+	\[ p \lor p \sim p\]
+	\item \textbf{Distributiva}
+	\[ p \wedge (q \lor r) \sim (p \wedge q) \lor (p \wedge r) \]
+	\[ p \lor (q \wedge r) \sim (p \lor q) \wedge (p \lor r) \]
+	\item \textbf{Absorción}
+	\[ p \wedge (q \lor p) \sim p \]
+	\[ p \lor (q \wedge p) \sim p \]
+	\item \textbf{Cero y uno}
+	\[ p \wedge \top \sim p \]
+	\[ p \lor \top \sim \top \]
+	
+	\[ p \wedge \bot \sim \bot \]
+	\[ p \lor \bot \sim p \]
+	\item \textbf{Contradicción}
+	\[ p \wedge (\neg p) \sim \bot \]
+	\item \textbf{Tercio excluido}
+	\[ p \lor (\neg p) \sim \top \]
+	\item \textbf{Doble negación}
+	\[ \neg (\neg p) \sim p \]
+	\item \textbf{Reducción}
+	\[ p \rightarrow q \sim \neg p \lor q \]
+	\[ p \leftrightarrow q \sim (p \rightarrow q) \wedge (q \rightarrow p) \]
+	\item \textbf{De Morgan}
+	\[ \neg(p \wedge q) \sim \neg p \lor \neg q\]
+	\[ \neg(p \lor q) \sim \neg p \wedge \neg q\]
+\end{enumerate}
+
+Se deja como ejercicio simplificar las expresiones siguientes mediante las leyes que acabamos de ver 
+\begin{enumerate}
+	\item $ \{ \varphi_1, \varphi_2 \} \models \psi $
+	\item $ \mbox{Insat}(\Phi \cup \{\psi\} ) $
+	\item $ \varphi_1 \wedge \varphi_2 \wedge \neg \psi \sim \bot $
+\end{enumerate}
