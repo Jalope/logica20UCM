@@ -12,6 +12,21 @@
 {1cm}                           % espacio entre el texto y los encabezados
 {0pt}                             % altura del pie de página
 {2cm}                           % espacio entre el texto y el pie de página        
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lema}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+
+\theoremstyle{plain}
+\newtheorem{prop}{Proposición}
         
 \begin{document}
 
@@ -27,19 +42,24 @@
 \newcommand{\p}[0]{\mbox{PROP}_{SP}}
 \newcommand{\cb}[0]{\{ \wedge, \, \lor \, \rightarrow, \, \leftrightarrow \}} 
 \newcommand{\boox}[0]{\, \Box \,}
+\newcommand{\Mod}[0]{\mbox{Mod}}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}
 
-\theoremstyle{plain}
-\newtheorem{prop}{Proposición}
-	%\tableofcontents
+
+
+	\tableofcontents
 %	\maketitle
 	\newpage
      \input{pagestyle}
      \input{clase_1} %28/01/2020
      \input{clase_2} %29/01/2020
      \input{clase_3} %30/01/2020
-     \input{clase_4} %3/02/2020 
-
+     \input{clase_4} %3/02/2020
+     \input{clase_5} %4/02/2020
+     %Clase completa de problemas 
+	 \input{clase_6} %6/02/2020
+	 \input{clase_7} %10/02/2020
+	 \input{clase_8} %11/02/2020
+	 %Las clases intermedias son de problemas
+	%\input{clase_9} %19/02/2020 
 \end{document}

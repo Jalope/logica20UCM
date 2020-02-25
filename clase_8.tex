@@ -1,0 +1,65 @@
+\subsection{Completitud funcional}
+Debido a las leyes de reducción los operadores $\rightarrow, \, \leftrightarrow$ se dicen secundarios. También podemos definir nuevos operadores como 
+\begin{center}
+ $\begin{array}{ccc}
+ \mbox{Disyunción exclusiva}  & \veebar & p\veebar q \sim (p \lor \neg q) \lor (\neg p \lor q) \\ 
+ \mbox{NAND} & \downarrow & p\downarrow q \sim \neg( p \lor q) \\ 
+ \mbox{NOR} & \uparrow & p\uparrow q \sim \neg( p \wedge q)
+ \end{array}  $ 
+ \end{center} 
+ o a través de una tabla de verdad  
+\begin{center}
+ \begin{tabular}{|c|c|c|c|c|}
+ \hline 
+ p & q & $p\veebar q$ & $p\downarrow q$ & $p\uparrow q$ \\ 
+ \hline 
+ V & V & F & F & F \\ 
+ \hline 
+ V & F & V & V & F \\ 
+ \hline 
+ F & V & V & V & F \\ 
+ \hline 
+ F & F & F & V & V \\ 
+ \hline 
+ \end{tabular} 
+\end{center}
+\paragraph{}
+Podríamos construir un operador lógico con tantos argumentos como deseáramos. Pero, vamos a ver que todos ellos se pueden expresar de forma equivalente como conjunción, negación y disyunción. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=6cm]{completitud.png}
+\end{figure}
+\paragraph{}
+\begin{definition} Un conjunto de conectivas $\mathcal{C}$ es \textbf{funcionalmente completo} si cualquier otra conectiva $\mathdollar$ de aridad $n$ se puede expresar con las conectivas de $\mathcal{C}$.
+\end{definition}
+\begin{theorem}
+Sea $\mathcal{C}=\{ \lor, \, \wedge, \, \neg \}$ es funcionalmente completo. 
+\end{theorem}
+\begin{proof}
+Sea $\$$ conectiva de aridad $n$ y aplicamos inducción sobre $n$. 
+\paragraph{}
+Si $n=1$. Hay cuatro posibles conectivas de aridad 1, veamos sus tablas de verdad 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+p & $\$_1(p)$ & $\$_2(p)$ & $\$_3(p)$ & $\$_4(p)$ \\ 
+\hline 
+V & V & V & F & F \\ 
+\hline 
+F & V & F & V & F \\ 
+\hline 
+\end{tabular} 
+\end{center}
+Si nos fijamos, $\$_1(p) \sim \top$, $\$_4(p) \sim \bot$, $\$_2(p) \sim p$ y $\$_3(p) \sim \neg p$. Se cumple, por tanto, el caso base. 
+\paragraph{}
+Si $n > 1$. Se da la situación 
+\begin{figure}[h]
+\centering
+\includegraphics[width=6cm]{demo1.png}
+\end{figure}
+ $\$(P_1, \ldots, P_n)=(P_n \wedge \$_1(P_1, \ldots P_{n-1})) \lor (\neg P_n \wedge \$_2(P_1, \ldots P_{n-1})) $
+por hipótesis de inducción existen $\varphi_i, \, i=1,2$ construidas con las conectivas de $\mathcal{C}$ tales que $\varphi_i \sim \$_i$ con $i=1,2$, entonces 
+ $ \$(P_1, \ldots, P_n) \sim (P_n \wedge \varphi_1) \lor (\neg P_n \wedge \varphi_2) $
+\end{proof} 
+Se puede demostrar aplicando las leyes de De Morgan que el conjunto $\{ \wedge, \neg\}$ también es funcionalmente completo. Otros que también lo son y se deja la comprobación como ejercicio son 
+\[ (1)\, \{ \lor, \, \neg\} \quad (2)\, \{ \rightarrow, \, \bot\}, \quad (3)\, \{ \uparrow\} \quad (4)\, \{ \downarrow\} \]
