@@ -1,0 +1,97 @@
+\section{Lógica de primer orden}
+La idea es extender las posibilidades de la lógica de primer orden. Si pensamos en predicados como 
+\begin{enumerate}
+	\item \textit{Todos los primos mayores que 2 son impares}
+	\item \textit{El 3 es un primo mayor que 2}
+	\item \textit{El 3 es impar}
+\end{enumerate}
+es claro que no podemos expresarlo con las herramientas de la lógica proposicional. 
+
+La lógica de primer orden nos habla de \textit{elementos} de un \textit{conjunto} dado. Empezamos introduciendo algunas herramientas básicas 
+\begin{itemize}
+	\item \textbf{Constantes}: en nuestros predicados anteriores serían el 2 y el 3. 
+	\item \textbf{Variables}: aquellos elementos del conjunto a los que aplicamos las propiedades. Denotamos por $x,\, y, \, z \ldots$
+	\item \textbf{Símbolos de función}: para el conjunto de los números naturales, por ejemplo, hablaríamos de la suma $+$, del producto $\ast$ o de la función sucesor de un número $s(x)$. Gracias a ellas podremos expresar cosas como: $s(+(2,3))$ o en notación habitual $s((2+3))$.
+\end{itemize}
+estos objetos nos van a permitir construir los \textbf{términos}. 
+\paragraph{}
+Los símbolos que teníamos hasta ahora son insuficientes, por ello vamos a introducir algunos más
+\begin{itemize}
+	\item Símbolo de igualdad: $\doteq$
+	\item Símbolos de predicado: que establecen una propiedad. Por ejemplo, ser impar que podemos denotar como $\mbox{im}(x)$ o que un elemento sea menor que otro $<(x,y)$. El primer de ellos decimos que tiene aridad 1 (un argumento de entrada) y el segundo tienen aridad 2 (pues necesita dos entradas).
+	\item Cuantificadores: $\forall$ y $\exists$ 
+	\item Conectivas lógicas: $\cb$ y $\top$, $\bot$
+\end{itemize}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: A partir de las frases que hemos dado al inicio de la sección, vamos a formalizarlas con los nuevos elementos que hemos introducido.
+\begin{enumerate}
+	\item $\forall x \, (\mbox{pr}(x) \wedge 2<x \rightarrow \mbox{im}(x))$
+	\item $\mbox{pr}(3) \wedge 2<3$
+	\item $\mbox{im}(3)$
+\end{enumerate}
+\begin{definition}
+Una \textbf{signatura} $S$
+\[ S= \langle \cts{S}, \, \fn{S}, \, \pd{S} \rangle \]
+donde 
+\begin{itemize}
+	\item $\cts{S} \equiv$ conjunto de constantes de $S$.
+	\item $\fn{S} \equiv$ conjunto de símbolos de función con aridad.
+	\item $\pd{S} \equiv$ conjunto de símbolos de predicado con aridad.	
+\end{itemize}
+\end{definition}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Tomando el conjunto de los números naturales, obtenemos la signatura 
+\[ \mbox{Nat}= \langle \cts{\mbox{Nat}}, \, \fn{\mbox{Nat}}, \, \pd{\mbox{Nat}} \rangle \]
+donde 
+\begin{itemize}
+	\item $\cts{\mbox{Nat}} \equiv \{0, 1, \ldots\}$
+	\item $\fn{\mbox{Nat}} \equiv \{+\vert_{2}, s\vert_{1}\} $ 
+	\item $\pd{\mbox{Nat}} \equiv \{\mbox{im}\vert_{2}, <\vert_{1}\} $ 	
+\end{itemize}
+El número escrito tras la barra indica su aridad.
+\paragraph{}
+Consideramos el conjunto de \textbf{variables}
+\[ \var = \{x,y,z, \ldots \} \]
+siempre será numerable. 
+\begin{definition}
+Dada una signatura $S$, el \textbf{alfabeto} 
+\[ A_S =\cts{S} \cup \fn{S} \cup \pd{S} \cup \var \cup \cb \cup \{ \top,\, \bot,\, \forall,\, \exists,\, \doteq, \, (, \, )\} \]
+\end{definition}
+\begin{definition}
+Dada una signatura $S$, el conjunto de \textbf{términos} de $S$, $\term{S}$, es el menor subconjunto $X$ de $A^*_S$ que cumple 
+\begin{itemize}
+	\item Caso base 
+	\begin{itemize}
+		\item[(T1)] Si $c \in \cts{s}$ entonces $c \in X$
+		\item[(T2)] Si $x \in \var$ entonces $x \in X$
+	\end{itemize}
+	\item Paso recursivo
+	\begin{itemize}
+		\item[(T3)] $f\vert_{n} \in \fn{s}$ y $t_1, \ldots, t_n \in X$ entonces $f \in X$
+	\end{itemize}
+\end{itemize}
+\end{definition}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: En el ejemplo anterior definimos Nat, algunos términos suyos son 
+\[ 0, 1, 2,... \in \term{Nat} \] 
+\[ x, y, z,... \in \term{Nat} \]
+\[ s(x), s(1), +(s(x),s(0)),... \in \term{Nat} \]
+\begin{definition}
+Dada una signatura $S$, el conjunto de fórmulas de primer orden, $\form{s}$, es el menor subconjunto $X \subseteq A^*_S$ que verifica
+\begin{itemize}
+	\item Fórmulas atómicas, que denotamos como $\mbox{FORMAT}_{S}$
+	\begin{itemize}
+		\item[(F1)] $t_1, \, t_2 \in \term{s}$ entonces $t_1 \doteq t_2 \in X$
+		\item[(F2)] $p \in \pd{s}\vert_{n}$ y $t_1, \ldots, t_n \in \term{s}$ entonces $p(t_1, \ldots, t_n) \in X$
+		\item[(F3)]$\top, \bot \in X$
+	\end{itemize}
+	\item[(F4)] $\varphi_1, \varphi_2 \in X$ entonces $(\varphi_1 \boox \varphi_2) \in X$ también $\neg \varphi_i \in X$ con $i=1,2$.
+	\item[(F5)] $\varphi \in X$, $x \in \var$ entonces\footnote{El $\forall$ significa que todo elementos de $X$ cumple $\varphi$. Por otro lado, el $\exists$ significa que un elemento de $X$ cumple $\varphi$} $\forall x: \, \varphi$ y $\exists x: \, \varphi$.
+\end{itemize}
+\end{definition}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Si escribimos 
+\[  \exists x: \, \varphi \rightarrow \psi  \]
+el existe afecta a todo, en cambio, si escribimos 
+\[  (\exists x: \, \varphi) \rightarrow \psi  \]
+solo afecta a $\varphi$.
