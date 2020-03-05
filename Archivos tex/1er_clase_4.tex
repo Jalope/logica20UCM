@@ -1,0 +1,79 @@
+\begin{definition}
+Enumeramos las diferentes consecuencias lógicas para la lógica de primer orden. Sea $\Phi \subset \form{S}$, $\varphi \in \form{S}$ e $\mathfrak{Y}$ una S-interpretación. 
+\begin{enumerate}
+	\item $\mathfrak{Y} \models \varphi$ significa que $\varphi^{\mathfrak{Y}}=V$
+	\item $\mathfrak{Y} \models \Phi$ si $\mathfrak{Y} \models \varphi$ para todo $\varphi \in \Phi$
+	\item $\Phi \models \varphi$ si todo $\mathfrak{Y}$ tal que $\mathfrak{Y} \models \Phi$ entonces $\mathfrak{Y} \models \varphi$
+	\item $\Phi$ es \textbf{satisfactible} si existe $\mathfrak{Y}$ tal que $\mathfrak{Y} \models \Phi$
+    \item $\Phi$ es \textbf{insatisfactible} si no existe $\mathfrak{Y}$ tal que $\mathfrak{Y} \models \Phi$
+    \item $\varphi$ es \textbf{tautología} si toda $\mathfrak{Y}$ verifica $\mathfrak{Y} \models \varphi$
+    \item $\varphi$ es \textbf{contradicción} si no existe $\mathfrak{Y}$ tal que $\mathfrak{Y} \models \varphi$
+    \item $\varphi$ es \textbf{contingencia} si existe $\mathfrak{Y}$ tal que $\mathfrak{Y} \models \varphi$
+\end{enumerate} 
+\end{definition}
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Sea la signatura $S= \langle \emptyset, \emptyset, \{ R\vert_2\}\rangle$ y las fórmulas 
+\begin{equation}
+\varphi = \exists x \, \forall y \, R(x, y)
+\end{equation}
+\begin{equation}
+\psi = \forall y \, \exists x \, R(x, y)
+\end{equation}
+veamos que $\varphi \models \psi$. 
+
+Sea $\mathfrak{Y}$ S-interpretación de soporte $A$ tal que $\mathfrak{Y} \models \varphi$, entonces existe un $a \in A$ tal que 
+\[ \mathfrak{Y}[a/x] \models \forall y \, R(x, y) \]
+por tanto, para todo $b \in A$ se cumple que 
+\[ \mathfrak{Y}[a/x][b/y] \models R(x, y) \] 
+
+Hay que ver si $\mathfrak{Y} \models \psi$, entonces para todo $c \in A$ tal que 
+\[ \mathfrak{Y}[c/y] \models \exists x, \,  R(x, y) \]
+por tanto, para todo $d \in A$ se cumple que 
+\[ \mathfrak{Y}[c/y][d/x] \models R(x, y) \]
+
+basta considerar $d=a$ se cumple que   
+\[ \mathfrak{Y}[c/y][a/x] \models R(x, y) \]
+entonces 
+\[ \varphi \models \psi \Leftrightarrow \varphi \rightarrow \psi  \]
+es tautología.
+\paragraph{}
+Veamos ahora que $\psi \not \models \varphi$. Basta dar un contraejemplo, para ello proponemos la interpretación  $\mathfrak{a} = \langle A, \emptyset, R^{\mathfrak{a}} \rangle$, con $A =  \{1, 2, 3 \}$ y $R^{\mathfrak{a}} = \{(1, 2), (2, 3), (3, 1)\}$\footnote{La notación para $R^{\mathfrak{a}}$ esta dada en un sentido conjuntista, expresando sólo aquellos pares que hacen la valoración cierta}.
+
+Veamos que $\mathfrak{Y} \models \psi$, para todo $a \in A$, tenemos que 
+\[ \mathfrak{Y}[a/y] \models \exists x \, R(x,y) \]
+habrá que estudiar 
+\begin{itemize}
+	\item $\mathfrak{Y}[1/y] \models \exists x \, R(x,y)$
+	\item $\mathfrak{Y}[2/y] \models \exists x \, R(x,y)$
+	\item $\mathfrak{Y}[3/y] \models \exists x \, R(x,y)$
+\end{itemize}
+Demostramos el primer caso. Necesitamos un $b$ tal que 
+\[ \mathfrak{Y}[1/y][b/x] \models R(x,y) \]
+\[ (R^{\mathfrak{a}})^{\exists [1/y][b/x]}=V \]
+\[ R^{\mathfrak{a}}(b,1)=V \Leftrightarrow b=3 \]
+por simetría  
+\begin{itemize}
+	\item[(2)] $c=1$
+	\item[(3)] $d=2$
+\end{itemize}
+ahora tenemos que $\mathfrak{Y} \models \varphi$, donde $\varphi$ es la ecuación (1). La pregunta que nos hacemos es 
+\[ c \in A, \mathfrak{Y}[c/x] \models \forall y \, R(x, y) \]
+y para todo $d \in A$
+\[ \mathfrak{Y}[c/x][d/y] \models R(x, y) \]
+finalmente lo que buscamos es 
+\[ R^{\mathfrak{a}}(c,d)=V \]
+pero este elemento no existe, luego hemos demostrado que $\psi \not \models \varphi$.
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Dada la fórmula
+\begin{equation}
+\varphi = (\exists z \, \forall x \, \neg f(x) \doteq z) \land (\forall x \, \forall y \, f(x) \doteq f(y) \rightarrow x \doteq y) 
+\end{equation}
+que dividimos en dos como 
+\[ \varphi = \varphi_1 \wedge \varphi_2 \]
+por $\varphi_2$ deducimos que $f$ es inyectiva y por $\varphi_1$ deducimos que $f$ no es sobreyectiva. Por tanto, $\varphi$ es una contingencia. Para que esto ocurra el cardinal de $A$ debe ser infinito. 
+\paragraph{}
+Si ahora observamos la fórmula 
+$\varphi_{=2} = (\exists x \, \exists y \, \neg x \doteq y) \land \forall z \, (z \doteq y \lor z \doteq x)$
+vemos que su cardinal debe ser $2$. Por tanto, del mismo modo se puede definir $\varphi_{=n}$ para todo $n< \infty$, siendo $\varphi_{=\infty}$ la fórmula (3). 
