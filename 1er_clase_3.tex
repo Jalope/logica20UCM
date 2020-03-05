@@ -1,0 +1,158 @@
+\subsection{Semántica}
+Vamos a darle un \textit{sentido} a las fórmulas que ya hemos definido. Lo primero que necesitamos es una signatura.
+
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: dada la signatura $S= \si{ar}$ como
+\[ \cts{ar}=\{0 \} \]
+\[ \fn{ar}=\{ s\vert_{1},\, +\vert_{2}, \, \ast\vert_{2}\} \]
+\[ \pd{ar}=\{ <\vert_{2} \} \]
+y llevamos a cabo una escritura usual, en el sentido de que $+(0,s(s(0))) \equiv 0+2$. Esto lo hacemos para todo operador, función o termino con variable. 
+\paragraph{}
+También vamos a necesitar un soporte y entender como este interacciona con las distintas funciones y predicados.
+
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}:
+para las constantes 
+\[ \begin{matrix}
+&\cts{ar}& \rightarrow & \mathbb{N}\\
+&0&\mapsto& 0
+\end{matrix} \]
+para las funciones
+\[ \begin{matrix}
+s:&\mathbb{N}& \rightarrow & \mathbb{N}\\
+&n&\mapsto& n+1
+\end{matrix} \]
+\[ \begin{matrix}
++:&\mathbb{N}& \rightarrow & \mathbb{N}\\
+&(m,\,n)&\mapsto& m+n
+\end{matrix} \] 
+\[ \begin{matrix}
+\ast : &\mathbb{N}& \rightarrow & \mathbb{N}\\
+&(m, \, n)&\mapsto& m \ast n
+\end{matrix} \]
+finalmente para símbolos de predicados
+\[ \begin{matrix}
+<:&\mathbb{N}& \rightarrow & \mbox{BOOL}\\
+&(m, \, n)&\mapsto& \left \lbrace \begin{matrix}
+V & \mbox{si} & m<n\\
+F & \mbox{e.c.c.} &
+\end{matrix}\right.
+\end{matrix} \] 
+\paragraph{}
+Vamos a dotar a estas funciones y conjuntos de una estructura formal. 
+\begin{definition}
+Sea $S = \si{S}$ una signatura. Una \textbf{S-álgebra} es una tupla 
+\[ \mathfrak{a} := \langle A, \{ c^{\mathfrak{a}} / \, c \in \cts{S} \}, \{f^{\mathfrak{a}} / \, f \in \fn{S}\}, \{p^{\mathfrak{a}} / \, p \in \pd{S} \} \rangle \]
+De modo que:
+\begin{itemize}
+    \item $A \neq \emptyset$, denominado \textbf{conjunto soporte}
+    \item Si $c \in \cts{S}$, entonces $c^{\mathfrak{a}} \in A$.
+    \item Si $f\vert_k \in \fn{S}$, entonces $f^{\mathfrak{a}}: A^{k} \rightarrow A$.
+    \item Si $p\vert_k \in \pd{S}$, entonces $p^{\mathfrak{a}}: A^{k} \rightarrow \mbox{BOOL}$.
+\end{itemize}
+\end{definition}
+\paragraph{}
+Como consecuencia, se tiene que 
+\begin{enumerate}
+	\item $\exists x \, x \doteq x  $ es tautologia
+	\item $\forall x \, \neg x \doteq x  $ es contradicción
+\end{enumerate}
+\paragraph{}
+Entonces, lo que hemos dado anteriormente en el ejemplo XXIII es una $S_{ar}$-álgebra. En el siguiente ejemplo, vamos a tomar como soporte un conjunto menos usual que los números naturales. 
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: sea $\mathfrak{a} = \langle \{\bigtriangleup, \bigcirc \}, \{0^{\mathfrak{a}}\}, \{+^{\mathfrak{a}}, *^{\mathfrak{a}}, s^{\mathfrak{a}}\}, \{<^{\mathfrak{a}}\}\rangle$ tal que
+\begin{itemize}
+    \item $0^{\mathfrak{a}} = \bigtriangleup$.
+    \item Aplicaciones para cada fórmula y símbolo de proposición 
+\[ \begin{matrix}
+s^{\mathfrak{a}}:&\{\bigtriangleup, \bigcirc \}& \rightarrow & \{\bigtriangleup, \bigcirc \}\\
+&x&\mapsto& \bigtriangleup
+\end{matrix} \]
+
+\[ \begin{matrix}
++^{\mathfrak{a}}:&\{\bigtriangleup, \bigcirc \}^2& \rightarrow & \{\bigtriangleup, \bigcirc \}\\
+&(x,\,y)&\mapsto&  \bigtriangleup
+\end{matrix} \] 
+
+\[ \begin{matrix}
+\ast^{\mathfrak{a}} : &\{\bigtriangleup, \bigcirc \}^2& \rightarrow & \{\bigtriangleup, \bigcirc \}\\
+&(x, \, y)&\mapsto& \bigcirc 
+\end{matrix} \]
+
+\[ \begin{matrix}
+<^{\mathfrak{a}}:&\{\bigtriangleup, \bigcirc \}^2& \rightarrow & \mbox{BOOL} \\
+&(x, \, y)&\mapsto& V
+\end{matrix} \] 
+   \end{itemize} 
+de forma intuitiva, dadas las dos álgebras para la misma signatura, vemos que tienen \textit{interpretaciones diferentes} a una misma fórmula 
+\[ \ast(+(s(0),\,s(0)),\,s(s(s(0)))) \]
+\begin{itemize}
+	\item Para $\mathbb{N}$ obtenemos 
+	\[ \ast(+(1,\,1),\,3)= \ast(2,\,3)=6 \]
+	\item Mientras que si tomamos $\{\bigtriangleup, \bigcirc \}$ entonces
+		\[ \ast(+(\bigtriangleup,\,\bigtriangleup),\,\bigtriangleup)= \ast(\bigcirc,\,\bigtriangleup)=\bigcirc \] 
+\end{itemize} 
+
+Formalicemos el concepto de interpretación mediante la siguiente definición. 
+\begin{definition}
+Sea $S$ signatura. Una \textbf{S-interpretación} es una tupla $\mathfrak{Y} = \langle \mathfrak{a}, \sigma \rangle$ donde
+\begin{itemize}
+    \item $\mathfrak{a}$ es una S-álgebra con soporte $A$.
+    \item $\sigma : \var \rightarrow A$.
+\end{itemize}
+\end{definition}
+\paragraph{}
+Definimos recursivamente la interpretación a través de la siguiente definición
+\begin{definition}
+Sea $S = \si{S}$ una signatura, $\mathfrak{Y}$ S-interpretación y $t \in \term{S}$.  Sea $t^{\mathfrak{Y}}$
+\begin{itemize}
+    \item Caso base:
+    \begin{itemize}
+    	\item $t=c^{\mathfrak{Y}} = c^{\mathfrak{a}}$ si $c \in \cts{S}$
+        \item $t=x^{\mathfrak{Y}} = \sigma(x)$ si $x \in \var$
+    \end{itemize}
+    \item Caso recursivo:
+    \begin{itemize}
+        \item Si $f\vert_k \in \fn{S}$, $t_1, \dots, t_k \in \term{S}$
+        \[ f(t_1, \dots, t_k)^{\mathfrak{Y}} = f^{\mathfrak{a}}(t_{1}^{\mathfrak{Y}}, \dots, t_{k}^{\mathfrak{Y}}) \] 
+    \end{itemize}
+\end{itemize}
+\end{definition}
+Del mismo modo, podemos definir recursivamente la \textit{valoración}. Pero antes damos una aclaración en cuestión de notación, abusando del concepto de sustitución definido en la lógica proposicional se tiene que $\sigma[a/x], \, x \in \var, \, a \in A$, $\mathfrak{Y}= \langle \mathfrak{a}, \sigma \rangle$, entonces  $\mathfrak{Y}[a/x]= \langle \mathfrak{a},\sigma[a/x]\rangle$. 
+\paragraph{}
+\begin{definition}
+Sea $S = \si{S}$, $\mathfrak{Y} := \langle \mathfrak{a}, \sigma \rangle$ S-interpretación, con $A$ conjunto soporte. La \textbf{interpretación de una fórmula} se define recursivamente como sigue $\varphi \in \form{S}$, $\varphi^{\mathfrak{Y}}$, como:
+\begin{itemize}
+    \item Caso base:
+        \begin{itemize}
+            \item Si $\varphi = \top$, entonces $\varphi^{\mathfrak{Y}} = V$.
+            \item Si $\varphi = \bot$, entonces $\varphi^{\mathfrak{Y}} = F$.
+            \item Si $\varphi = t \doteq s$, con $t, s \in \term{S}$, entonces 
+\[ \begin{matrix}
+\varphi^{\mathfrak{Y}} = V & \mbox{si} & t^{\mathfrak{Y}} = s^{\mathfrak{Y}}\\
+\varphi^{\mathfrak{Y}} = F & \mbox{e.c.c} 
+\end{matrix} \]            
+            \item Si $\varphi = p(t_1, \dots, t_k)$, con $t_1, \dots, t_k \in \term{S}$, $p\vert_k \in \pd{S}$, entonces 
+            \[ \begin{matrix}
+\varphi^{\mathfrak{Y}} = V & \mbox{si} &p^{\mathfrak{a}}(t_{1}^{\mathfrak{Y}}, \dots, t_{k}^{\mathfrak{Y}}) = V\\
+\varphi^{\mathfrak{Y}} = F & \mbox{e.c.c} 
+\end{matrix} \]  
+        \end{itemize}
+    \item Caso recursivo:
+        \begin{itemize}
+            \item Si $\varphi = \neg \varphi_1$, entonces  $\varphi^{\mathfrak{Y}} = v_{\neg}(\varphi_{1}^{\mathfrak{Y}})$
+            \item Si $\varphi = \varphi_1 \boox \varphi_2$, entonces $\varphi^{\mathfrak{Y}} = v_{\Box}(\varphi_{1}^{\mathfrak{Y}}, \varphi_{2}^{\mathfrak{Y}})$
+            \item Si $\varphi = \forall x \, \varphi_1$, con $x \in \var$, entonces 
+            \[ \begin{matrix}
+\varphi^{\mathfrak{Y}} = V & \mbox{si} & \mbox{p.t. } a \in A, \, \varphi_1^{\mathfrak{Y}[a/x]} = V\\
+\varphi^{\mathfrak{Y}} = F & \mbox{e.c.c} 
+\end{matrix} \]  
+            \item Si $\varphi = \exists x \, \varphi_1$, con $x \in Var$, entonces
+            \[ \begin{matrix}
+\varphi^{\mathfrak{Y}} = V & \mbox{si} & \mbox{existe } a \in A, \, varphi_1^{\mathfrak{Y}[a/x]} = V\\
+\varphi^{\mathfrak{Y}} = F & \mbox{e.c.c} 
+\end{matrix} \]   
+        \end{itemize}
+\end{itemize}
+\end{definition}
