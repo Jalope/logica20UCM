@@ -1,0 +1,114 @@
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: dada la fórmula 
+\[ \exists x\,  p(x) \rightarrow \forall x \, p(x) \]
+si $[\forall x \, p(x)] =V$ entonces la premisa es cierta para toda valoración. Ahora, si $[\forall x \, p(x)] =F$ entonces (teniendo en cuenta que siempre consideramos conjuntos de elementos no vacíos) existe un elemento $c$ tal que $[\neg p(c)]=V$ entonces $p(c) \rightarrow \forall x \, p(x)$, por tanto llegamos a la conclusión de que 
+\[ \exists x\,  p(x) \rightarrow \forall x \, p(x) \]
+es una tautología. 
+\paragraph{}
+Dado un conjunto $A$ y en él, el producto cartesiano $A^n$, veamos algunos casos partículares de este tipo de conjuntos 
+\begin{itemize}
+	\item El conjunto $A^0=\{ \emptyset \}$, la justificación más sencilla viene de considerar \[ A^0 \times A \] que debe ser igual a $A$. Para que esto ocurra, el cardinal debe mantenerse tras realizar la operación, luego, no queda otra opción más que el conjunto vacío. 
+	\item Las aplicaciones que se crean a partir de este conjunto pueden inducir a error
+	\[ f: \, A^0 \rightarrow A  \]
+	puede interpretarse como 
+	\[ f_1: \, \{\emptyset\} \rightarrow A, \quad f_2:\, \emptyset \rightarrow A \]
+	la diferencia radica en que para $f_2$ sólo hay una función que será $f=\emptyset$, en cambio, para $f_1$ hay tantas funciones como elementos tiene A, basta con asociar $\emptyset \mapsto a$ con $a \in A$.
+\end{itemize}
+\paragraph{}
+También a tener en cuenta, $f\vert_{0} \in \fn{S}$ es una función de aridad 0, es decir, una constante. De esto modo podriamos quitar el conjunto de las constantes $\cts{S}$ de la signatura. Del mismo modo podemos definir, símbolos de proposición de aridad cero, $p\vert_{0} \in \pd{S}$ que nos darán sentido a expresiones del tipo $p \rightarrow q(x)$.
+\paragraph{}
+\begin{definition}
+Sea $S=\si{S}$, se definen los conjuntos 
+\[ T^0_S= \{ c / \, c \in \cts{S} \} \cup \var_S \]
+\[ T^{n+1}_S= T_n^S \cup \bigcup_{k \in \mathbb{N}} \{ f(t_1, \ldots, t_k) / \, f\vert_{k} \in \fn{S},  \, t_1, \ldots, t_n \in T_n^S  \} \]
+\[ T_S= \bigcup_{i \in \mathbb{N}}T^i_S \]
+\end{definition}
+\paragraph{}
+\begin{prop}
+Dada la definición (21), se verifica que 
+\[ T_S = \term{S} \]
+\end{prop}
+\begin{proof}
+Es igual que la demostración del capítulo primero que se hace dentro de la definición 6.
+\end{proof}
+\subsection{Inducción estructural y recursividad}
+La \textbf{recursion} la definimos como 
+\begin{enumerate}
+    \item Caso base
+    \[ F_0: \{c /\,  c \in \cts{S} \} \cup Var \rightarrow A \]
+    \item Caso recursivo 
+    \[ f\vert_{k} \in \fn{S}, \, F_f: A^{k} \rightarrow A  \]
+\end{enumerate}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: para ilustrar la recursividad en, introducimos la función $\mbox{var}$
+\[ \mbox{var}: \term{S} \rightarrow \mathcal{P}(\mbox{var}) \]
+\begin{enumerate}
+	\item Caso base, $var_{0}: \cts{S} \cup \var \rightarrow A$
+	\begin{itemize}
+		\item $\mbox{var}_{0}(c) = \emptyset, \quad c \in \cts{S}$
+		\item $\mbox{var}_{0}(x) = \{x\}, \quad x \in \mbox{var}$	
+	\end{itemize} 
+    \item Caso recursivo, 
+    \begin{itemize}
+    \item $\mbox{var}_{f}: \mathcal{P} (\var)^{k} \rightarrow \mathcal{P} (\var)$, dada por
+    \[ (A_1, \dots, A_k) \mapsto \bigcup_{i = 1}^{k} A_k \]
+    en consecuencia
+    \[ \mbox{var}_{f}(f(t_1, \dots, t_k)) = \bigcup_{i = 1}^{k} \mbox{var}(t_i) \]
+    \end{itemize} 
+\end{enumerate}
+El esquema de recursión para fórmulas queda de la manera 
+\begin{enumerate}
+	\item Fórmulas básicas 
+\[ F_{S}^{0}=  \{ \top, \bot \} \cup  \bigcup_{k \in \mathbb{N}}\{ p(t_1, \ldots, t_k) / \, t_1, \ldots, t_k \in \term{S}, \, p_k \in \pd{S}  \} \cup  \{ t \doteq s / \, t,s \in \term{S}\}  \]	
+\item Fórmulas recursivas 
+\[ F_{S}^{n+1} := F_{S}^{n} \cup \{ \neg \varphi /  \, \varphi \in F_{S}^{n}\} \cup \{ (\varphi \square \psi) / \, \varphi, \psi \in F_{S}^{n}\} \cup \{(Qx \, \varphi) / \, x \in Var, \, \varphi \in F_{S}^{n}\} \]
+\end{enumerate}
+\paragraph{}
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Definimos ahora $\mbox{var}$ de forma recursiva en $FORM_S$
+\begin{enumerate}
+    \item Caso base:
+    \begin{itemize}
+    	\item $\mbox{var}(\top) = \mbox{var}(\bot) = \emptyset$
+		\item $\mbox{var}(t \doteq s) = \mbox{var}(t) \cup \mbox{var}(s)$            
+        \item $\mbox{var}(p(t_1, \dots, t_k)) = \bigcup_{i=1}^{k} \mbox{var}(t_i)$
+    \end{itemize} 
+    \item Caso recursivo:
+    \begin{itemize}
+        \item $\mbox{var}((\neg \varphi)) = \mbox{var}(\varphi)$
+        \item $\mbox{var}((\phi \boox \psi)) = \mbox{var}(\varphi) \cup \mbox{var}(\psi)$
+        \item $\mbox{var}((Qx \, \varphi)) = \{x\} \cup \mbox{var}(\varphi)$
+    \end{itemize}
+\end{enumerate}
+\paragraph{}
+Para la \textbf{inducción estructural} queremos demostrar una propiedad P, para cada uno de los términos. Seguimos los pasos de manera análoga a como lo hacemos en lógica proposicional. 
+\begin{enumerate}
+	\item Caso base: hay que demostrar P para $\cts{S} \cup \var$
+	\item Paso inductivo: Suponemos cierta la propiedad P para $t_1, \ldots, t_k$. P es cierta para $T_S^n$ y siendo $f\vert_{k} \in \fn{S}$ lo demostramos para $f(t_1, \ldots, t_k)$, esto es, para $T_s^{n+1}$
+\end{enumerate}
+\paragraph{}  
+\begin{definition}
+Introducimos un nuevo concepto asociado a las variables
+\begin{enumerate}
+	\item Una \textbf{variable ligada} es aquella está afectada por un cuantificador. 
+	\item Una \textbf{variable libre} es aquella que no es ligada, es decir, que no se ve afectada por un cuantificador. 
+\end{enumerate}
+aunque las fórmulas con variables libres no son \textit{buenas}, las vamos a necesitar para poder llegar a fórmulas que carezcan de ellas. 
+\end{definition}
+\paragraph{}
+Debido a la importancia de conocer el número de variables libres que contiene una fórmula, vamos a definir una función que cumpla con este objetivo utilizando el esquema recursivo
+\begin{enumerate}
+	\item Caso base 
+	\[ \mbox{lib}(\varphi)= \mbox{var}(\varphi) \]
+	\item Caso recursivo 
+	\begin{itemize}
+		\item $\mbox{lib}(\neg \varphi)= \mbox{lib}(\varphi)$
+		\item $\mbox{lib}(\varphi \boox  \psi)= \mbox{lib}(\varphi) \cup \mbox{lib}(\psi)$ con $\Box \in \cb$
+		\item $\mbox{lib}(Qx\, \varphi)= \mbox{lib}(\varphi) \setminus \{x\}$ con $Q \in \{\exists, \forall\}$
+	\end{itemize}
+\end{enumerate}
+\paragraph{}
+\begin{definition}
+Diremos que $\varphi$ es una \textbf{sentencia} si $\mbox{lib}(\varphi)=\emptyset$ y denotamos como $\varphi \in \mbox{Sent}_S$.
+\end{definition}
