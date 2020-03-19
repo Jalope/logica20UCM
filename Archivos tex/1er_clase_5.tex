@@ -1,0 +1,44 @@
+%\paragraph{}
+%$\clubsuit$
+%\paragraph{}
+%{\tiny \color{blue} \textit{El contenido que viene a continuación se impartieron en la clase del 5 de Marzo a la que no pude asistir. Si hay algo que está mal avisadme por el foro. Marco el inicio y el final de esta clase con el símbolo de un trébol.}}
+%\paragraph{}
+\subsubsection{Axiomas de Peano}
+Dada la signatura $\mbox{Nat}$ de los ejemplos XVI y XVII podemos formalizar los axiomas de Peano de la siguiente manera. 
+\begin{enumerate}
+    \item $\forall x \; \neg s(x)\doteq 0$
+    \item $\forall x \, \forall y \; s(x)\doteq s(y)\to x\doteq y$
+    \item $\forall x \; x+0\doteq x$
+    \item $\forall x \, \forall y \; x+s(y)\doteq s(x+y)$
+    \item $\forall x \; x*0\doteq 0$
+    \item $\forall x \, \forall y \; x*s(y)\doteq (x*y)+x$
+    \item $\forall x \, \forall y \; (x<y \leftrightarrow \exists z \; x+s(z)\doteq y)$
+\end{enumerate}
+Se cumple 
+\[\mathcal{N}=\{ \mathbb{N}, \{0^{\mathcal{N}}\}, \, \{+^{\mathcal{N}}, \, \ast^{\mathcal{N}}\}, \, \{<^{\mathcal{N}}\} \}\]
+entonces
+\[ 0^{\mathcal{N}}=0 \]
+
+\[ \begin{matrix}
++^{\mathcal{N}} : &\mathbb{N}^2& \rightarrow & \mathbb{N}\\
+&(m, \, n)&\mapsto& m + n
+\end{matrix} \qquad \qquad   \begin{matrix}
+\ast^{\mathcal{N}} : &\mathbb{N}^2& \rightarrow & \mathbb{N}\\
+&(m, \, n)&\mapsto& m * n
+\end{matrix}  \]
+\paragraph{}
+\[  \begin{matrix}
+<^{\mathcal{N}} : &\mathbb{N}^2& \rightarrow & \mbox{BOOL}\\
+&(m, \, n)&\mapsto& \left\lbrace \begin{matrix}
+V & \mbox{si} & m<n\\
+F & \mbox{e.c.c} &
+\end{matrix}\right.
+\end{matrix}  \]
+
+Si $\mathfrak{Y}: \langle \mathfrak{a}, \, \sigma \rangle$ entonces $\mathfrak{Y} \models \Phi_{\mbox{Peano}}$.
+
+\begin{theorem}[\textbf{de Incompletitud}]
+No se puede encontrar un conjunto de axiomas que identifique solo a $\mathbb{N}$.
+\end{theorem}
+
+$\clubsuit$

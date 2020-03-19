@@ -1,0 +1,9 @@
+\begin{theorem}[\textbf{Lema de sustitución}] 
+Sea $S$ una signatura, $\g{Y}$ una interpretación, $\bar{x} \in \var^n$, $\bar{t}\in \term{S}^n$. Denotamos $\bar{t}^{\g{Y}}=(t_1^{\g{Y}}, \ldots, t_n^{\g{Y}})$ y $\g{J}=\g{Y}[\bar{t}^{\g{Y}}/\bar{x}]$
+\begin{enumerate}
+	\item Si $s \in \term{S}$ entonces
+	\[ (s[\bar{t}/\bar{x}])^{\g{Y}}=s^{\g{J}} \]
+	\item Si $\varphi \in \form{S}$ entonces
+	\[ (\varphi[\bar{t}/\bar{x}])^{\g{Y}}=\varphi^{\g{J}} \quad (\g{Y}\models \varphi[\bar{t}/\bar{x}] \Leftrightarrow \g{J}=\varphi) \]
+\end{enumerate}
+\end{theorem}

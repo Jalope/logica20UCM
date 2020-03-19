@@ -1,0 +1,96 @@
+\subsection{Isomorfía}
+\begin{definition}
+Sean $\mathfrak{a}_1$ y $\mathfrak{a}_2$ dos S-estructuras con soportes $A_1$ y $A_2$. La aplicación 
+\[ h: \; A_1 \rightarrow A_2 \]
+es un \textbf{isomorfismo} si 
+\begin{itemize}
+	\item[(a)] $h$ es biyectiva 
+	\item[(b)] Si c $\in \cts{S}$: $h(c^{\g{a}_1})=c^{\g{a}_2}$
+	\item[(c)] Si $f\vert_{k} \in \fn{S}$ y $a_1, \ldots, a_n \in A$:
+	\[ h(f^{\g{a}_1}(a_1, \ldots, a_k))=f^{\g{a}_2}(h(a_1), \ldots, h(a_k)) \]
+	\item[(d)] Si $p\vert_{k} \in \pd{S}$ y $a_1, \ldots, a_n \in A$:
+	\[ p^{\g{a}_1}(a_1, \ldots, a_k)=p^{\g{a}_2}(h(a_1), \ldots, h(a_k)) \]
+	$\g{a}_1$ y $\g{a}_2$ son isomorfas ($\g{a}_1 \simeq \g{a}_2$)
+\end{itemize} 
+además, $h$ es un \textbf{isomorfismo entre dos interpretaciones} 
+\[ \g{Y}_1=\langle \mathfrak{a_1}, \, \sigma_1 \rangle \quad \mbox{e} \quad \g{Y}_2=\langle \mathfrak{a_2}, \, \sigma_2 \rangle  \]
+si
+\begin{itemize}
+	\item $h$ es isomorfismo entre $\g{a}_1$ y $\g{a}_2$ 
+	\item $h(\sigma_1(x))=\sigma_2(x)$ para $x \in \var$
+	\[ \g{Y}_1 \simeq \g{Y}_2  \]
+\end{itemize}
+\end{definition}
+
+\addtocounter{ej}{1} % sumo 1
+\textbf{Ejemplo \Roman{ej}}: Sean los grupos $(\mathbb{Z}_2, \, +) \simeq (A, \, \ast)$ donde $A=\{a, \, b \}$ 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|l|l}
+$\ast$ & \textbf{a} & \textbf{b} \\ \hline
+\textbf{a}      & a & b \\ \hline
+\textbf{b}      & b & a
+\end{tabular}
+\end{table}
+
+\[ S= \langle \{e\}, \, \{ \ast\vert_{2}\},\, \emptyset \rangle  \]
+\[ \g{a}_1= \langle \mathbb{Z}_2, \, \{ e^{\g{a}_1}\},\, \{\ast^{\g{a}_1}\}, \, \emptyset \rangle  \]
+\[ \g{a}_2= \langle A, \, \{ e^{\g{a}_2}\},\, \{\ast^{\g{a}_1}\}, \, \emptyset \rangle  \]
+\[ h(0)=a, \quad h(1)=b, \quad \mbox{es isomorfía} \]
+\[ \g{a}_1 \simeq \g{a}_2 \]
+
+\begin{theorem}
+Sea $h$ un isomorfismo entre $\g{Y}_1$ e $\g{Y}_2$
+\begin{enumerate}
+	\item Si $t \in \term{S}$ es un término
+	\[ t^{\g{Y}_1}= t^{\g{Y}_2} \]
+	\item Si $\varphi \in \form{S}$ es una fórmula
+	\[ \varphi^{\g{Y}_1}= \varphi^{\g{Y}_2} \quad (\g{Y}_1 \models \varphi \Leftrightarrow \g{Y}_2 \models \varphi) \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textit{Se deja como ejercicio}. La demostración para términos es inmediata por inducción estructural. Para fórmulas es sencilla, en el caso recursivo para cuantificadores hay que utilizar lo siguiente
+\[ \mbox{si } a \in A \mbox{ y } \g{Y}_1 \simeq \g{Y}_2 \]
+entonces
+\[ \g{Y}_1[a/x] \simeq \g{Y}_2[a/x] \]   
+\end{proof}
+\begin{lemma} Los isomorfismos son funciones biyectivas.
+\end{lemma}
+\begin{proof}
+\textit{Ejercicio}
+\end{proof}
+\subsection{Sustitución}
+\begin{definition}[Sustitución]
+\textbf{Para términos}. Sea $S$ signatura. Sean $t \in \term{S}$, $\bar{x} = (x_1, \dots, x_n) \in \var$ y $\bar{s} = (s_1, \dots, s_n)\in \term{S}$. Definimos la \textit{sustitución} de $\bar{x}$ por $\bar{s}$ en t como
+\begin{itemize}
+    \item Si $t \in \cts{S}$, $t[\bar{s}/\bar{x}] = t$
+    \item Si $t \in \var$, $t[\bar{s}/\bar{x}] = s_i$ si $t = x_i$, para cierto $i$, y $t[\bar{s}/\bar{x}] = t$ si $t \neq x_i$, para todo $i$
+    \item $f(t_1, \dots t_n)[\bar{s}/\bar{x}] = f(t_1[\bar{s}/\bar{x}], \dots, t_n[\bar{s}/\bar{x}])$
+\end{itemize}
+
+
+\textbf{Para fórmulas}. Sea $S$ una signatura, $\varphi \in \form{S}$, definimos la \textbf{sustitución} de $\bar{x}$ por $\bar{s}$ en $\varphi$ como
+\begin{itemize}
+    \item Caso base:
+    \begin{itemize}
+        \item $\top[\bar{s}/\bar{x}]=\top$
+        \item $\bot[\bar{s}/\bar{x}]=\bot$
+        \item $(t_1\doteq t_2)[\bar{s}/\bar{x}]=(t_1[\bar{s}/\bar{x}]\doteq t_2[\bar{s}/\bar{x}])$
+        \item Si $p\vert_k\in \pd{S}$ y $t_1,\dots,t_k \in \term{S}$, $p(t_1,\dots,t_k)[\bar{s}/\bar{x}]=p(t_1[\bar{s}/\bar{x}],\dots,t_k[\bar{s}/\bar{x}])$
+    \end{itemize}
+    \item Caso recursivo
+    \begin{itemize}
+        \item $(\neg\varphi)[\bar{s}/\bar{x}]=(\neg\varphi[\bar{s}/\bar{x}])$
+        \item $(\varphi_1\boox\varphi_2)[\bar{s}/\bar{x}]=(\varphi_1[\bar{s}/\bar{x}]\boox\varphi_2[\bar{s}/\bar{x}])$
+        \item Se define por casos
+\end{itemize}    
+\end{itemize}    
+        \[ (Qx\;\varphi)[\bar{s}/\bar{x}]=  \left\lbrace \begin{matrix}
+ (Qx\;\varphi[\bar{s}/\bar{x}]) & \mbox{si} & x\notin\bar{x}, \; x \notin\bigcup_{i=1}^nvar(t_i) \\
+ \\
+ (Qx\;\varphi \left[\left( \dfrac{s_1,\dots,s_{i-1},s_{i+1},\dots,s_n)}{(x_1,\dots,x_{i-1},x_{i+1}\dots,x_n)} \right)\right] & \mbox{si} & x=x_i\in\bar{x}, \; x\notin\bigcup_{i=1}^n var(t_i) \\
+\\ 
+ (Qz\;\varphi[z/x][\bar{s}/\bar{x}])  & \mbox{si} & x\in\bigcup_{i=1}^nvar(t_i), \;  z \notin \bar{x} \cup \bigcup_{i=1}^n var(t_i) \\
+\end{matrix}\right. \]
+\end{definition}
