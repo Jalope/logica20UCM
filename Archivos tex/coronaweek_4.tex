@@ -1,0 +1,199 @@
+\subsection{Equivalencias Lógicas}
+\begin{definition}
+Sean $\varphi, \psi \in \form{S}$. Decimos que $\varphi$ y $\psi$ son \textbf{lógicamente equivalentes}, escrito $\varphi \sim \psi$, si y sólo si para toda interpretación $\mathfrak{Y}$, se verifica $\varphi^{\mathfrak{Y}} = \psi^{\mathfrak{Y}}$ (equivalentemente $\mathfrak{Y} \models \varphi$ si y solo si $\mathfrak{Y} \models \psi$
+\end{definition}
+
+\begin{prop}
+Sean $\varphi, \psi \in \form{S}$, las siguientes afirmaciones son equivalentes 
+\begin{enumerate}
+    \item $\varphi \sim \psi$.
+    \item $\models \varphi \leftrightarrow \psi$.
+    \item $\varphi \models \psi$ y $\psi \models \varphi$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\textit{Se deja como ejercicio}
+\end{proof}
+
+\begin{theorem}[\textbf{Leyes de equivalencia lógica con cuantificadores}] Se tiene que
+
+\begin{enumerate}
+	\item Todas las leyes de equivalencia lógica de la lógica proposicional (véase \ref{sec:equivalencias}) siguen siendo validas.
+    \item Siendo $u$ variable nueva
+    \[\begin{matrix}
+    \forall x \, \varphi \sim \forall u \, \varphi[u/x],\\
+    \\
+    \exists x \, \varphi \sim \exists u \, \varphi[u/x]
+    \end{matrix}\]
+ 
+    \item Si $\varphi \sim \psi$, entonces 
+\[ \begin{matrix}
+\forall x \, \varphi \sim  \forall x \, \psi, \\
+\\
+\exists x \, \varphi \sim  \exists x \, \psi
+\end{matrix} \]    
+    
+    \item 
+\[ \begin{matrix}
+\neg \forall x \, \varphi \sim \exists x \, \neg \varphi,\\
+\\
+\neg \exists x \, \varphi \sim \forall x \, \neg \varphi
+\end{matrix} \]    
+
+    \item 
+    \[  \begin{matrix}
+    \forall x \, \varphi \sim \neg \exists x \, \neg \varphi,\\
+    \\
+    \exists x \, \varphi \sim \neg \forall x \neg \varphi
+\end{matrix}      \]
+
+    \item Si $x \neq y$, entonces 
+\[ \begin{matrix}
+\forall x \, \forall y \, \varphi \sim \forall y \, \forall x \, \varphi,\\
+\\
+\exists x \, \exists y \, \varphi \sim \exists y \, \exists x \, \varphi
+\end{matrix} \]    
+    
+    \item 
+\[ \begin{matrix} 
+\forall x \, \varphi \wedge \psi \sim \forall x \, \varphi \wedge \forall x\, \psi,\\
+\\
+\exists x \, \varphi \lor \psi \sim \exists x \, \varphi \lor \exists x\, \psi
+\end{matrix} \]    
+\end{enumerate}
+En las reglas que siguen suponemos que $x \notin \mbox{lib}(\psi)$.
+\begin{enumerate}[resume]
+    \item 
+\[ \begin{matrix}
+\forall x \, \psi \sim \psi,\\
+\\
+\exists x \, \psi \sim \psi
+\end{matrix} \]    
+    
+   \item 
+\[ \begin{matrix}
+(\forall x \, \varphi) \wedge \psi \sim \forall x \, (\varphi \wedge \psi),\\
+\\
+(\exists x \, \varphi) \lor \psi \sim \exists x \, (\varphi \lor \psi)
+\end{matrix} \]   
+
+    \item
+\[ \begin{matrix}
+\forall x \, (\varphi \lor \psi) \sim \forall x \, \varphi \lor \forall x \, \psi,\\
+\\
+\exists x \, (\varphi \wedge \psi) \sim \exists x \, \varphi \wedge \exists x \, \psi
+\end{matrix} \]    
+     
+    \item 
+\[ \begin{matrix}
+(\forall x \, \varphi) \rightarrow \psi \sim \exists x \, (\varphi \rightarrow  \psi),\\
+\\
+(\exists x \, \varphi) \rightarrow \psi \sim \forall x (\varphi \rightarrow  \psi)
+\end{matrix} \]    
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} 
+Se tiene que
+\begin{enumerate}
+	\item Ya han sido justificadas anteriormente.
+	\item Veamos el caso $\forall$, el $\exists$ se hace de forma análoga (\textit{se recomienda escribirlo)}.
+\[ \mathfrak{Y} \models \forall u \, \varphi[u/x] \]    
+   por definición es, 
+   \[ \mbox{para todo } a \in A, \, \mathfrak{Y}[a/u] \models \varphi[u/x] \] 
+   Por el lema de sustitución $u^{\mathfrak{Y}[a/u]} = a$, 
+\[ \mbox{para todo } a \in A, \, (\mathfrak{Y}[a/u])[a/x] \models \varphi \]   
+    puesto que $u$ es nueva, 
+\[ (\mathfrak{Y}[a/u])[a/x] \sim_{\varphi} \mathfrak{Y}[a/x] \]    
+    por el lema de coincidencia lo anterior es equivalente a, 
+\[ \mbox{para todo } a \in A, \, \mathfrak{Y}[a/x] \models \varphi \]    
+     que es la definición de $\mathfrak{Y} \models \forall x \, \varphi$.
+     
+     \item Tenemos $\mathfrak{Y}$  tal que $\mathfrak{Y} \models \exists x \, \varphi$, por definición existe $a \in A$ tal que $\g{Y}[a/x] \models \varphi$ puesto que $\varphi \sim \psi$, lo anterior es equivalente a $a \in A$ con $\g{Y}[a/x] \models \psi$, que es la definición de $\g{Y} \models \exists x \, \psi$. De nuevo el caso $\forall$ es análogo (\textit{Escribirlo}).
+     
+    \item Tenemos $\g{Y}$ tal que $\g{Y} \models \neg \forall x \, \varphi$ que es lo mismo que $\g{Y} \not \models \forall x \, \varphi$. Por tanto, debe existir $a \in A$ tal que $\g{Y}[a/x] \not \models \varphi$, de forma equivalente $\g{Y} \models \neg \varphi$ que es la definición de $\g{Y} \models \exists x \neg \varphi$. (\textit{Escribir el caso de la negación}).
+    
+    \item $\varphi \sim \neg \neg \varphi$ por tanto, aplicando (3), $\forall x \, \varphi \sim \forall x \, \neg \neg \varphi$, aplicando (4), $\forall x \, \neg \neg \varphi \sim \neg \exists x \, \neg \varphi$ por tanto 
+    \[ \forall x \, \varphi \sim \neg \exists x \, \neg \varphi \] 
+    El caso $\exists$ es análogo.
+    
+    \item Si $x = y$, ver regla (8) más adelante que implica 
+    \[ \forall x \forall x \varphi \sim \forall x \varphi \]
+    \[ \exists x \exists x \varphi \sim \exists x \varphi \]
+    
+    \item Sea $\g{Y}$ tal que $\g{Y} \models \forall x \, \varphi \wedge \forall x \, \psi$ es equivalente a que $\g{Y} \models \forall x \, \varphi $ y $\g{Y} \models \forall x \, \psi$. 
+    
+    Entonces, en el primer caso tenemos que 
+\[ \mbox{para todo } a \in A, \, \g{Y}[a/x] \models \varphi \]    
+     y en el segundo que 
+\[ \mbox{para todo } b \in A, \, \g{Y}[b/x] \models \psi \]     
+     obtenemos 
+\[ \mbox{para todo } c \in A, \, \g{Y}[c/x] \models \varphi \mbox{ y } \g{Y}[c/x] \models \psi \]     
+  entonces 
+\[ \g{Y}[c/x] \models \varphi \wedge \psi \]  
+finalmente
+\[ \g{Y} \models \varphi \wedge \psi \]
+    \item Hay que usar que $\g{Y}[a/x] \sim_{\psi} \g{Y}$
+ 	\item Aplicando (7) y (8).
+    \item  
+    Hay que demostrar que $\g{Y} \models \forall x\, \varphi \lor \psi$ si y solo si $\g{Y}\models\forall x\,\varphi\lor\forall x\psi$ 
+    \begin{itemize}
+    	\item[($\Rightarrow$)] $\g{Y}\models\forall x\,(\varphi\lor\psi)$ 
+    	\[ \mbox{para todo } a\in A, \, \g{Y}[a/x]\models\varphi\lor\psi \]
+    	diferenciamos dos casos 
+    	\begin{itemize}
+    		\item Existe $a \in A$, $\g{Y}[a/x] \not \models \varphi$ entonces $\g{Y}[a/x]\models\psi$. Por el lema de coincidencia $g{Y} \models \psi$. Por el lema de coincidencia 
+    		\[ \mbox{para todo } c \in A, \, \g{Y}[c/x] \models \psi \]
+    		que es a definición de \[ \g{Y} \models \forall x \psi \]
+    		por tanto $ \g{Y} \models \forall x \varphi \lor \forall x \psi $
+    		
+    		\item $ \mbox{para todo } a \in A, \, \g{Y}[a/x] \models \varphi $ definición de $\g{Y} \models \forall x \varphi$ 
+    	\end{itemize}
+    	\item[($\Leftarrow$)] De nuevo dividimos en dos casos 
+    	\begin{itemize}
+    		\item $\g{Y}\models\forall x \varphi$ sii para todo $a\in A$, $\g{Y}[a/x]\models\varphi$ por definición de $\forall$, para todo $a\in A$, $\g{Y}[a/x]\models\varphi\lor\psi$ por definición de para todo $\g{Y}\models\forall x (\varphi\lor\psi)$
+    		\item $\g{Y}\models\forall x \psi$ (\textit{análogo al anterior}.
+    	\end{itemize}
+    \end{itemize}
+     \textit{Escribir los casos para el $\exists$}
+\end{enumerate}
+\end{proof}
+
+Las leyes de equivalencia permiten \textit{sacar} los cuantificadores al inicio de la fórmula. 
+
+\begin{definition}
+Sea $\varphi \in \form{S}$ se dice que está en forma prenexa si es de la forma 
+\[ \varphi= Q_1x_1, \ldots, Q_nx_n \; \varphi, \quad Q_i \in \{\forall, \, \exists \} \quad 1 \leq i \leq n \]
+$\psi$ (el núcleo) está libre de cuantificadores. 
+\end{definition}
+
+\begin{prop}
+Sea $\varphi \in \form{S}$. Existe $\psi \in \form{S}$ en forma prenexa tal que $\psi \sim \varphi$ 
+\end{prop}
+\begin{proof}
+Antes de nada observar lo siguiente. Si $x \in \mbox{Lib}(\psi)$
+\[ \forall x \varphi \lor \psi \sim \forall u \varphi[u/x] \lor \psi \sim \forall u (\varphi[u/x] \lor \psi) \]
+u variable nueva.
+
+La demostración se hace por inducción estructural. Los casos complicados se relación con los conectivos. Se hace para $\{\neg, \, \lor\}$ (los demás casos son análogos, y a la vez, innecesarios pues ya vimos que el conjunto $\{\neg, \, \lor\}$ es funcionalmente completo). 
+\begin{itemize}
+	\item[($\neg$)] Por hipótesis de inducción $\psi$ en forma prenexa tal que $\varphi \sim \psi$
+	\[ \psi= Q_1x_1, \ldots, Q_nx_n \, \psi  \]
+	\[ \neg \varphi \sim \neg \psi \sim Q_1'x_1, \ldots, Q_n'x_n \, \psi_1  \]
+	donde 
+	\[ Q_i'= \left\lbrace \begin{matrix}
+\forall & \mbox{si} & Q_i=\exists\\
+	\\
+	\exists & \mbox{si} & Q_i=\forall
+\end{matrix} \right.	 \]
+	\item[($\lor$)] Por hipótesis de inducción existen $\varphi'$ y $\psi'$ en forma prenexa tal que 
+	\[ \varphi \sim \varphi' \qquad \psi \sim \psi' \]
+	\[ \varphi'= Q_1'x_1, \ldots, Q_n'x_n \, \varphi'' \]
+	\[ \psi'= Q_1^2y_1, \ldots, Q_m^2y_m \, \psi'' \]
+	consideramos variables nuevas $u_1, \ldots, u_n$ y $v_1, \ldots, v_m$, entonces
+	\[ \varphi'= Q_1'u_1, \ldots, Q_n'u_n \, \varphi''[\bar{u}/\bar{x}] \]
+	\[ \psi'= Q_1^2v_1, \ldots, Q_m^2v_m \, \psi''[\bar{v}/\bar{y}] \]
+	puesto que $\bar{u}$ y $\bar{v}$ son nuevas 
+	\[ \varphi' \lor \psi'= Q_1'u_1, \ldots, Q_n'u_n \, Q_1^2v_1, \ldots, Q_m^2v_m \, \varphi''[\bar{u}/\bar{x}] \lor \psi''[\bar{v}/\bar{y}]   \]
+\end{itemize} 
+\end{proof}
