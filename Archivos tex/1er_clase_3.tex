@@ -2,7 +2,7 @@
 Vamos a darle un \textit{sentido} a las fórmulas que ya hemos definido. Lo primero que necesitamos es una signatura.
 
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: dada la signatura $S= \si{ar}$ como
+\textbf{Ejemplo \arabic{ej}}: dada la signatura $S= \si{ar}$ como
 \[ \cts{ar}=\{0 \} \]
 \[ \fn{ar}=\{ s\vert_{1},\, +\vert_{2}, \, \ast\vert_{2}\} \]
 \[ \pd{ar}=\{ <\vert_{2} \} \]
@@ -11,7 +11,7 @@ y llevamos a cabo una escritura usual, en el sentido de que $+(0,s(s(0))) \equiv
 También vamos a necesitar un soporte y entender como este interacciona con las distintas funciones y predicados.
 
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}:
+\textbf{Ejemplo \arabic{ej}}:
 para las constantes 
 \[ \begin{matrix}
 &\cts{ar}& \rightarrow & \mathbb{N}\\
@@ -61,7 +61,7 @@ Como consecuencia, se tiene que
 Entonces, lo que hemos dado anteriormente en el ejemplo XXIII es una $S_{ar}$-álgebra. En el siguiente ejemplo, vamos a tomar como soporte un conjunto menos usual que los números naturales. 
 \paragraph{}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: sea $\mathfrak{a} = \langle \{\bigtriangleup, \bigcirc \}, \{0^{\mathfrak{a}}\}, \{+^{\mathfrak{a}}, *^{\mathfrak{a}}, s^{\mathfrak{a}}\}, \{<^{\mathfrak{a}}\}\rangle$ tal que
+\textbf{Ejemplo \arabic{ej}}: sea $\mathfrak{a} = \langle \{\bigtriangleup, \bigcirc \}, \{0^{\mathfrak{a}}\}, \{+^{\mathfrak{a}}, *^{\mathfrak{a}}, s^{\mathfrak{a}}\}, \{<^{\mathfrak{a}}\}\rangle$ tal que
 \begin{itemize}
     \item $0^{\mathfrak{a}} = \bigtriangleup$.
     \item Aplicaciones para cada fórmula y símbolo de proposición 
@@ -150,7 +150,7 @@ Sea $S = \si{S}$, $\mathfrak{Y} := \langle \mathfrak{a}, \sigma \rangle$ S-inter
 \end{matrix} \]  
             \item Si $\varphi = \exists x \, \varphi_1$, con $x \in Var$, entonces
             \[ \begin{matrix}
-\varphi^{\mathfrak{Y}} = V & \mbox{si} & \mbox{existe } a \in A, \, varphi_1^{\mathfrak{Y}[a/x]} = V\\
+\varphi^{\mathfrak{Y}} = V & \mbox{si} & \mbox{existe } a \in A, \, \varphi_1^{\mathfrak{Y}[a/x]} = V\\
 \varphi^{\mathfrak{Y}} = F & \mbox{e.c.c} 
 \end{matrix} \]   
         \end{itemize}

@@ -1,4 +1,4 @@
-\subsection*{Definiciones recursivas}
+\subsection{Definiciones recursivas}
 Supongamos que queremos definir una función 
 \[ H: \p \rightarrow A \]
 donde $A$ puede tomar diferentes tipos de conjunto: $\mathbb{N}$, $\mathcal{P}(\p)$,... para hacerlo de forma recursiva, vamos a necesitar las siguientes funciones auxiliares
@@ -21,7 +21,7 @@ dada por $H(\varphi)=H_{\mbox{AT}}(\varphi), \forall \varphi \in \mbox{AT}$
 En los casos (i) e (ii) ni la entrada ni la salida de la función está formada por formulas. 
 \paragraph{}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: Si queremos definir de forma recursiva el número de paréntesis abiertos de una proposición
+\textbf{Ejemplo \arabic{ej}}: Si queremos definir de forma recursiva el número de paréntesis abiertos de una proposición
 \[ H_{(}: \p \rightarrow \mathbb{N} \] 
 se tendría
 \[ H_{\mbox{AT}\,(}: \mbox{AT} \rightarrow \mathbb{N} \]
@@ -43,7 +43,7 @@ Escribirlo así es un poco farragoso por lo que, generalmente, escribiremos las 
 \[ H_{\Box \,(}(\varphi_1 \boox \varphi_2)= H_{(}(\varphi_1)+H_{(}(\varphi_2)+1 \]
 además, en la escritura, se suprime la función auxiliar. 
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: definiremos de forma recursiva el número de apariciones de $\wedge$ en $\varphi$ y lo denotamos como $\vert \varphi \vert^{\wedge}$.
+\textbf{Ejemplo \arabic{ej}}: definiremos de forma recursiva el número de apariciones de $\wedge$ en $\varphi$ y lo denotamos como $\vert \varphi \vert^{\wedge}$.
 \begin{itemize}
 	\item[(AT)] $\vert \varphi \vert^{\wedge}=0, \forall \varphi \in \mbox{AT}$
 	\item[($\neg$)] $\vert (\neg \varphi) \vert^{\wedge}=\vert \varphi \vert^{\wedge}$
@@ -57,12 +57,12 @@ además, en la escritura, se suprime la función auxiliar.
 \begin{definition} Dadas dos fórmulas $\varphi$ y $\psi$ decimos que $\psi$ es una \textbf{subformula} de $\varphi$ si una parte de $\varphi$ formada por símbolos consecutivos es idéntica a $\psi$.
 \end{definition}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: dada la formula, 
+\textbf{Ejemplo \arabic{ej}}: dada la formula, 
 \[ \varphi \equiv (p \lor (q \rightarrow (\neg r))) \]
 observamos que esta formada por las subformulas siguientes
 \[ p, \, q, \, r \, (\neg r), \, (q \rightarrow (\neg r)), \varphi \]
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: Creamos una función recursiva que devuelva las diferentes subformulas de una formula dada.
+\textbf{Ejemplo \arabic{ej}}: Creamos una función recursiva que devuelva las diferentes subformulas de una formula dada.
 \[ \mbox{SUB}: \p \rightarrow \mathcal{P}(\p) \]
 dada por 
 \begin{itemize}
@@ -79,11 +79,11 @@ existe una única función $H: \p \rightarrow A$ que verifica
 \[H((\neg \varphi))=H_{\neg}(H (\varphi))\]
 \[H ( (\varphi_1 \boox \varphi_2) ) = H_{\Box}(H(\varphi_1, \, \varphi_2))\]
 \end{prop}
-\subsection*{Eliminación de paréntesis}
+\subsection{Eliminación de paréntesis}
 Como en la aritmética básica, cuando escribimos una operación podemos utilizar las reglas de prioridad, asociatividad, etc. para escribir el menor número de paréntesis posible. Así por ejemplo en 
 \[ (((2 \cdot 3)+5)-(3 \cdot 2))=2 \cdot 3 +5-3\cdot 3 \]
 la idea es, por tanto, dar una serie de reglas para poder hacer lo mismo con nuestras formulas de proposición. 
-\subsubsection*{Reglas de eliminación de paréntesis}
+\subsubsection{Reglas de eliminación de paréntesis}
 \begin{enumerate}
 	\item \textbf{Elminación de paréntesis externos}. No aportan información.
 	\item \textbf{Prioridad entre conectivas}. En la siguiente lista, las conectivas, aparecen de más prioridad a menos

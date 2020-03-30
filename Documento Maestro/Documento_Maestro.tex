@@ -27,6 +27,9 @@
 
 \theoremstyle{plain}
 \newtheorem{prop}{Proposición}
+
+%\addtocounter{ej}{1} % sumo 1
+%\textbf{Ejemplo \Roman{ej}}:
         
 \begin{document}
 
@@ -51,6 +54,10 @@
 \newcommand{\term}[1]{\mbox{TERM}_{#1}}
 \newcommand{\form}[1]{\mbox{FORM}_{#1}}
 \newcommand{\si}[1]{\langle \cts{#1},\, \fn{#1}, \, \pd{#1} \rangle}
+
+\newcommand{\tc}[2]{\xymatrix{{#1}\ar@{|-}[r]^{tb}&{#2}}}
+%para invocarlo sería \tc{#1}{#2}
+
 
 \newcommand{\g}[1]{\mathfrak{#1}}
 
@@ -85,6 +92,7 @@
 	 \input{coronaweek_3} %16/03/2020
 	 \input{coronaweek_4} %17/03/2020
 	 \input{coronaweek_5} %23/03/2020	 
+	 \input{coronaweek_6} %30/03/2020
 	 
 	
 \end{document}

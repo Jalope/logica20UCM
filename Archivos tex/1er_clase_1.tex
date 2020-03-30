@@ -1,4 +1,6 @@
+\newpage
 \section{Lógica de primer orden}
+\subsection{Primeras definiciones}
 La idea es extender las posibilidades de la lógica de primer orden. Si pensamos en predicados como 
 \begin{enumerate}
 	\item \textit{Todos los primos mayores que 2 son impares}
@@ -23,7 +25,7 @@ Los símbolos que teníamos hasta ahora son insuficientes, por ello vamos a intr
 	\item Conectivas lógicas: $\cb$ y $\top$, $\bot$
 \end{itemize}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: A partir de las frases que hemos dado al inicio de la sección, vamos a formalizarlas con los nuevos elementos que hemos introducido.
+\textbf{Ejemplo \arabic{ej}}: A partir de las frases que hemos dado al inicio de la sección, vamos a formalizarlas con los nuevos elementos que hemos introducido.
 \begin{enumerate}
 	\item $\forall x \, (\mbox{pr}(x) \wedge 2<x \rightarrow \mbox{im}(x))$
 	\item $\mbox{pr}(3) \wedge 2<3$
@@ -40,7 +42,7 @@ donde
 \end{itemize}
 \end{definition}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: Tomando el conjunto de los números naturales, obtenemos la signatura 
+\textbf{Ejemplo \arabic{ej}}: Tomando el conjunto de los números naturales, obtenemos la signatura 
 \[ \mbox{Nat}= \langle \cts{\mbox{Nat}}, \, \fn{\mbox{Nat}}, \, \pd{\mbox{Nat}} \rangle \]
 donde 
 \begin{itemize}
@@ -72,7 +74,7 @@ Dada una signatura $S$, el conjunto de \textbf{términos} de $S$, $\term{S}$, es
 \end{itemize}
 \end{definition}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: En el ejemplo anterior definimos Nat, algunos términos suyos son 
+\textbf{Ejemplo \arabic{ej}}: En el ejemplo anterior definimos Nat, algunos términos suyos son 
 \[ 0, 1, 2,... \in \term{Nat} \] 
 \[ x, y, z,... \in \term{Nat} \]
 \[ s(x), s(1), +(s(x),s(0)),... \in \term{Nat} \]
@@ -89,8 +91,9 @@ Dada una signatura $S$, el conjunto de fórmulas de primer orden, $\form{s}$, es
 	\item[(F5)] $\varphi \in X$, $x \in \var$ entonces\footnote{El $\forall$ significa que todo elementos de $X$ cumple $\varphi$. Por otro lado, el $\exists$ significa que un elemento de $X$ cumple $\varphi$} $\forall x: \, \varphi$ y $\exists x: \, \varphi$.
 \end{itemize}
 \end{definition}
+\paragraph{}
 \addtocounter{ej}{1} % sumo 1
-\textbf{Ejemplo \Roman{ej}}: Si escribimos 
+\textbf{Ejemplo \arabic{ej}}: Si escribimos 
 \[  \exists x: \, \varphi \rightarrow \psi  \]
 el existe afecta a todo, en cambio, si escribimos 
 \[  (\exists x: \, \varphi) \rightarrow \psi  \]
