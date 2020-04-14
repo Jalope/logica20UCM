@@ -1,0 +1,242 @@
+\subsection{Conjuntos de Hintikka para lógica de primer Orden}
+Para continuar con el teorema de completitud, lo siguiente es definir el análogo a los conjuntos de Hintikka que vimos en la lógica proposicional, pero ahora para la lógica de primer orden.
+
+Lo primero que necesitamos es el concepto de \textbf{término adecuado} para un conjunto de fórmulas $\Phi\subseteq \form{S}$.
+
+\begin{definition}
+  Sea S una signatura, $t\in $ y $\Phi\subseteq\form{S}$. Diremos que $t$ es \textbf{adecuado} para $\Phi$ si
+  \begin{itemize}
+  \item $\voc(t)\subseteq \voc(\Phi)$ 
+  \item $\var(t)\subseteq \lib(\Phi)$
+  \end{itemize}
+\end{definition}
+\paragraph{}
+\textbf{Observación.} Puede darse el caso de que no encontremos ningún término adecuado para un conjunto de fórmulas. Por ejemplo consideremos el conjunto de fórmulas
+\[ \Phi = \{\exists x\ (p(x)\rightarrow q(x))\} \]
+En este caso $(\voc(\Phi)\cap\mathit{Ct}_{S}) \cup \lib(\Phi)=\emptyset$. En este caso
+tomaremos como término adecuado cualquier constante auxiliar $c \in C_A$ nueva.
+
+\begin{definition}
+  Sea $S$ una signatura,  $\Phi\subseteq \form{S}$ y $T_{H}=\{t \, / t \in \term{S}
+  \mbox{ adecuado para } \Phi \}$. Diremos que $\Phi$ es de \textbf{Hintikka} si y sólo si
+  \begin{itemize}
+  \item $\Phi$ es coherente, es decir
+    \begin{itemize}
+    \item $\bot\not\in\Phi$
+    \item no existe $\varphi\in\Phi$ tal que $\varphi\in\Phi$ y $\varphi\in\Phi$
+    \end{itemize}
+  \item $\Phi$ es $\alpha$-saturado: si $\alpha\in\Phi$ es una $\alpha$-fórmula, $\alpha_{1},\alpha_{2}\in\Phi$
+  \item $\Phi$ es $\beta$-saturado: si $\beta\in\Phi$ es una $\beta$-fórmula, $\beta_{1}\in \Phi$ o $\beta_{2}\in\Phi$
+  \item $\Phi$ es $\sigma$-saturado: si $\sigma\in\Phi$ es una $\sigma$-fórmula, $\sigma_{1}\in \Phi$
+  \item $\Phi$ es $\gamma$-saturado: si $\gamma\in\Phi$ es una $\gamma$-fórmula y $t\in T_{H}$, entonces $\gamma(t)\in \Phi$
+  \item $\Phi$ es $\delta$-saturado: si $\delta\Phi$ es una $\gamma$-fórmula, entonces existe una constante auxiliar $c\in CA$ tal que $\delta(c)\in \Phi$
+  \item $\Phi$ es $\theta$-saturado: si $\theta\in\mathrm{EQ}_{S}$ es un axioma de igualdad, entonces $\theta\in\Phi$.
+  \end{itemize}
+\end{definition}
+
+A continuación veremos que un conjunto de Hintikka es satisfactible. El primer paso para llegar a ello es establecer cuál va a ser el soporte. Al ser $\term{S}$ un conjunto, nos puede servir para construir el
+soporte. Es lo que se llama el \textbf{álgebra libre de términos}. Pero este álgebra no es suficiente. Supongamos que tenemos la signatura de la aritmética. Según las fórmulas, en cual modelo de la aritmética podemos tener que los términos $s(0)+0$ y $s(0)$ representan el mismo elemento. Eso se traduce que en nuestro álgebra necesitamos establecer una relación de equivalencia de términos. Esa relación la denotaremos como
+$\equiv_{\Phi}$, la idea es que $t \equiv_{\Phi} s$ si $\Phi\models
+t \doteq s$.
+\begin{definition}
+  Sea $S$ una signatura, $\Phi\subseteq\form{S}$ y $s,t\in\term{S}$. Definimos
+  \[ t\equiv_{\Phi}s\quad\mbox{si y sólo si}\quad t\doteq s\in\Phi \]
+\end{definition}
+
+Lo primero que vamos a hacer es demostrar que, si $\Phi$ es un conjunto de fórmulas de Hintikka, $\equiv_{\Phi}$ es una relación de equivalencia en el conjunto $T_{\Phi}$.
+
+\begin{prop}
+  Sea $S$ una signatura, $\Phi\subseteq\form{S}$ un conjunto de fórmulas de Hintikka. Entonces la relación de $\equiv_{\Phi}\subseteq T_{\Phi}\times T_{\Phi}$ es una relación de equivalencia.
+  \begin{proof}
+    Sean $t,s\in T_{\Phi}$ tales que $t\equiv_{\Phi} s$, es decir, $t\doteq s\in\Phi$. Por ser $\Phi$ un conjunto de Hintikka tenemos que contiene el axioma de simetría
+    \[ \forall x \forall y\, x\doteq y\rightarrow y\doteq x \, \in\Phi \]
+    Resulta que ese axioma es una $\gamma$-fórmula. Por tanto $\gamma(t)\in\Phi$
+    \[ \gamma(t)= \forall y \, t \doteq y \rightarrow t\doteq x\, \in\Phi \]
+    Que vuelve a ser una $\gamma$-fórmula, por tanto $\gamma(t)(s)\in\Phi$
+    \[ \gamma(t)(s) = t\doteq s\rightarrow t\doteq s\, \in\Phi \]
+    Que es una $\beta$-fórmula, $\beta_{1}=\neg t\cdot s$ y $\beta_{2}= s\cdot t$. Puesto que $t\doteq s\in\Phi$, deducimos $\beta_{1}\not\in\Phi$. De lo que se deduce $\beta_{2}=s\cdot t\in\Phi$. Es decir $s\equiv_{\Phi}t$
+\end{proof}
+\end{prop}
+
+Todos sabemos que dado una relación de equivalencia induce una partición en el conjunto y por tanto podemos considerar el conjunto cociente, es decir, el conjunto de particiones inducido por la relación de equivalencia. Dado $t\in T_{\Phi}$,
+\[ [t]\quad=\quad\{s\, / s \in T_{\Phi}, t\equiv_{\Phi} s \} \]
+Entonces tenemos
+\[ T_{\Phi}/\equiv_{\Phi}\quad = \quad \{[t]\, / \, t\in T_{\Phi}\} \]
+El soporte del modelo que vamos a construir es este conjunto cociente: $T_{\Phi}/\equiv_{\Phi}$.
+
+En este conjunto cociente debemos definir el valor de las constantes, las funciones y los símbolos de predicado.
+\begin{itemize}
+\item Si $c\in Ct_{S}$ definimos
+  \[ c^{\g{T}_{\Phi}}=\left\{
+      \begin{matrix}
+        [c] & \mbox{si}\ c\in T_{\Phi}\\
+        \mbox{arbitrario} & \mbox{e.o.c}
+      \end{matrix}
+    \right. \]
+  Por el lema de coincidencia no importa el valor que tenga.
+
+\item Si $f|_{k}\in \fn{S}$ y $t_{1},\cdots t_{k}\in T_{\Phi}$
+  \[ f^{\g{T}_{\Phi}}([t_{1}],\cdots [t_{k}])=\left\{
+      \begin{array}{ll}
+        [f(t_{1},\cdots t_{k})]& \mbox{si}\ f(t_{1},\cdots t_{k})\in
+                                 T_{\Phi}\\
+        \mbox{arbitrario} & \mbox{e.o.c}
+      \end{array}
+    \right. \]
+\item Si $p|_{k}\in \pd{S}$ y $t_{1},\cdots t_{k}\in T_{\Phi}$
+  \[ p^{\g{T}_{\Phi}}([t_{1}],\cdots [t_{k}])=\left\{
+      \begin{array}{ll}
+        V & \mbox{si}\ p(t_{1},\cdots t_{k})\in\Phi\\
+        F & \mbox{e.o.c}
+      \end{array}
+    \right. \]
+\end{itemize}
+
+Antes de seguir hay que demostrar que las funciones y símbolos de predicado están bien definidos. Al estar definidos a partir de los representantes de las clases, hay que ver que no dependen de éstos.
+
+\begin{prop}
+  Sea $S$ una signatura, $\Phi\subseteq\form{S}$ un conjunto de fórmulas de Hintikka, $t_{1},\ldots, t_{k},s_{1},\ldots, s_{k}\in T_{\Phi}$ términos tales que $[t_{i}]=[s_{i}]$ para $1\leq i\leq k$.
+  \begin{itemize}
+  \item Si $f|_{k}\in \fn{S}$ entonces $[f(t_{1},\ldots, t_{k})]=[f(s_{1},\ldots,s_{k})]$
+  \item Si $p|_{k}\in \pd{S}$ entonces $p(t_{1},\ldots t_{k})\in\Phi$ si y sólo si $p(s_{1},\ldots,s_{k})\in\Phi$
+  \end{itemize}
+
+  \begin{proof}
+    En primer lugar veamos el caso de los símbolos de función. Puesto que $\Phi$ es de Hintikka tenemos que el axioma de igualdad
+    \[ \gamma_{0}=\forall x_{1}\cdots\forall x_{k}\forall y_{1}\cdots \forall y_{k}\, x_{1}\doteq y_{1}\wedge\cdots \wedge x_{k}\doteq y_{k}\rightarrow f(x_{1},\cdots,x_{k})\doteq f(y_{1},\cdots,y_{k})\in\Phi \]
+  Tenemos ahora una secuencia  de fórmulas
+  \[ \begin{array}{l}
+      \displaystyle\gamma_{1}=\gamma_{0}(t_{1}), \gamma_{2}=\gamma_{1}(t_{2}),
+      \cdots \gamma_{k}=\gamma_{k-1}(t_{k})\\
+      \gamma_{k+1}=\gamma_{k}(s_{1}),\gamma_{k+2}(s_{2}),
+      \displaystyle\cdots\gamma_{2k}=\gamma_{2k-1}(s_{k})\\
+      \gamma_{2k}\ =\ t_{1}\doteq s_{1}\wedge\cdots t_{k}\doteq s_{k}\rightarrow
+      f(t_{1},\cdots, t_{k})\doteq f(s_{1},\cdots, s_{k})
+    \end{array} \]
+  Resulta que $\gamma_{2k}$ es una $\beta$-fórmula. Por tanto $\neq(t_{1}\doteq s_{1}\wedge\cdots t_{k}\doteq s_{k}) \in\Phi$ o $f(t_{1},\cdots, t_{k})\doteq f(s_{1},\cdots, s_{k})\in\Phi$. Hay 2 casos
+ 
+  \begin{itemize}
+  \item $\neq(t_{1}\doteq s_{1}\wedge\cdots t_{k}\doteq s_{k}) \in\Phi$. Esta es una $\beta$-fórmula.
+    En este caso alguna de las fórmulas $\neg (t_{i}\doteq s_{i})\in\Phi$ ($1\leq i\leq k$). Por otro lado
+    $[t_{i}]=[s_{i}]$ significa $t_{i}\doteq s_{i}\in\Phi$. Pero al ser $\Phi$ de Hintikka, es coherente y no puede ser que $\neg (t_{i}\doteq  s_{i}), t_{i}\doteq  s_{i}\in\Phi$. Por
+    tanto, $\neq(t_{1}\doteq s_{1}\wedge\cdots t_{k}\doteq s_{k}) \not\in\Phi$
+  \item $f(t_{1},\cdots, t_{k})\doteq f(s_{1},\cdots, s_{k})\in\Phi$. Esta es la definición de
+    $ f(t_{1},\cdots, t_{k})\equiv_{\Phi} f(s_{1},\cdots, s_{k} $, por tanto $ [f(t_{1},\cdots,t_{k})]=[f(s_{1},\cdots, s_{k})] $.
+  \end{itemize}
+
+  El caso de los símbolos de proposición es similar. Hay que tener en cuenta que en este caso hay que demostrar un \textbf{si y sólo si}.
+\end{proof}
+\end{prop}
+
+Ahora podemos definir el álgebra que vamos a usar como modelo
+\[ \g{T}_{\Phi}\ =\ \bigl\langle
+  T_{\Phi}/\equiv_{\Phi},\{[c]\ |\ c\in Ct_{S}\},
+  \{f^{\g{T}_{\Phi}}\ |\ f|_{k}\in \fn{S}\},
+  \{p^{\g{T}_{\Phi}}\ |\ p|_{k}\in \pd{S}\}
+  \bigr\rangle \]
+
+Para dar una interpretación, necesitamos una asignación de variables
+\[ \sigma_{\Phi}=\left\{
+    \begin{array}{ll}
+      [x] & \mbox{si} x\in T_{\Phi}\\
+      \mbox{arbitrario} & \mbox{e.o.c}
+    \end{array}
+  \right\} \]
+Tomamos ahora la interpretación
+\[ \g{I}_{\Phi} = \langle \g{T}_{\Phi}, \sigma_{\Phi}\rangle \]
+A continuación demostraremos $\g{I}_{\Phi}\models\Phi$. En primer lugar tenemos
+\begin{prop}
+  Sea $S$ una signatura, $\Phi\subseteq\form{S}$ un conjunto de fórmulas de Hintikka y $t\in T_{\Phi}$. Entonces $\g{I}_{\Phi}=[t]$.
+
+  \begin{proof}
+    Se deja como ejercicio. Es sencilla por inducción estructural.
+  	\end{proof}
+	\end{prop}
+
+Tenemos ahora que demostrar $\g{I}\models\varphi$ para cada $\varphi\Phi$. La demostración no se puede hacer por inducción estructural. Debemos extender la norma que vimos en lógica proposicional
+\begin{definition}
+  Sea $S$ una signatura. Definimos la normal de una fórmula 
+\[ \Vert \bullet \Vert: \, \form{S}\mapsto \mathbb{N} \]  
+   de forma recursiva como sigue
+  \begin{description}
+  \item[Caso base]\label{le:casobase} $\Vert \varphi \Vert=0$ si $\varphi$ es atómica.
+
+  \item[Casos recursivos] \mbox{ }
+    \begin{itemize}
+    \item $\Vert\neg\varphi\Vert=1+\Vert\varphi\Vert$
+    \item $\Vert\varphi\wedge\psi\Vert=1+\Vert\varphi\Vert+\Vert\psi\Vert$
+    \item $\Vert\varphi\o\psi\Vert=1+\Vert\varphi\Vert+\Vert\psi\Vert$
+    \item $\Vert\varphi\rightarrow\psi\Vert=2+\Vert\varphi\Vert+\Vert\psi\Vert$
+    \item $\Vert\varphi \leftrightarrow \psi\Vert=5+\Vert\varphi\Vert+\Vert\psi\Vert$
+    \item $\Vert\forall x\,\varphi\Vert=1+\Vert\varphi\Vert$
+    \item $\Vert\exists x\,\varphi\Vert=1+\Vert\varphi\Vert$
+    \end{itemize}
+  \end{description}
+\end{definition}
+
+\textbf{Observación.}
+\begin{itemize}
+\item $\Vert\varphi\rightarrow\psi\Vert = \Vert\neg\varphi\o\psi\Vert$
+\item $\Vert\varphi\leftrightarrow\psi\Vert = \Vert(\varphi\rightarrow\psi)\wedge(\psi\rightarrow\varphi)\Vert$
+\end{itemize}
+\paragraph{}
+Antes de continuar necesitamos varios resultados previos
+\begin{lemma}\mbox{ }
+  \begin{itemize}
+  \item Si $\alpha$ es una $\alpha$-fórmula, $\Vert\alpha\Vert>\Vert\alpha_{1}\Vert$ y $\Vert\alpha\Vert>\Vert\alpha_{2}\Vert$
+  \end{itemize}
+  \item Si $\beta$ es una $\beta$-fórmula, $\Vert\beta\Vert>\Vert\beta_{1}\Vert$ y $\Vert\beta\Vert>\Vert\beta_{2}\Vert$
+  \item Si $\sigma$ es una $\sigma$-fórmula, $\Vert\sigma\Vert>\Vert\sigma\Vert$
+  \item Si $\varphi\in\form{S}$ es una fórmula y $t\in\term{S}$ y  $x\in\var$,$\Vert\varphi[t/x]\Vert=\Vert\varphi\Vert$
+  \begin{proof}
+    Las tres primeras están vistas en lógica proposicional. La última se hace por inducción estructural y queda como ejercicio. Intuitivamente la norma de una fórmula no depende de los términos involucrados.
+  \end{proof}
+  \end{lemma}
+
+\begin{lemma}
+  Sea $S$ una asignatura, $\Phi\subseteq\form{S}$ un conjunto defórmulas de Hintikka y $\varphi\in\form{S}$ una fórmula atómica. $\varphi\in\Phi$ si y sólo si $\g{I}_{\Phi}\models\varphi$.
+  \begin{proof} \mbox{ }
+      \begin{itemize}
+      \item $\varphi=\top$. Trivial
+      \item $\varphi\ =\ t\doteq s$. En este caso $t,s\in\Phi$ si y sólo si $t\equiv_{\Phi}s$, que es lo mismo
+        que  $[t]=[s]$. Por la proposición (11) tenemos $t^{\g{I}_{\Phi}}=s^{\g{I}_{\Phi}}$. Por tanto $\g{I}_{\Phi}\models t\doteq s$.
+      \item $\varphi\ =\ p(t_{1},\cdots, t_{k})$ para $p|_{k}\in \pd{S}$ y $t_{1},\cdots, t_{k}\in T_{\Phi}$.
+
+        Por definición $p(t_{1},\cdots, t_{k})\in\Phi$ si y sólo si $p^{\g{T}_{\Phi}}([t_{1}],\cdots,[t_{k}]) = V$. Por tanto tenemos
+        \[ p^{\g{T}_{\Phi}}([t_{1}],\cdots,[t_{k}])=
+          p^{\g{T}_{\Phi}}(t_{1}^{\g{I}_{\Phi}},\cdots,t_{k}^{\g{I}_{\Phi}})=
+          (p(t_{1},\cdots, t_{k}))^{\g{I}_{\Phi}} \]
+        Puesto que $(p(t_{1},\cdots, t_{k}))^{\g{I}_{\Phi}}=V$ es la definición de $\g{I}_{\Phi}\models p(t_{1},\cdots, t_{k})\in\Phi$, tenemos $p(t_{1},\cdots, t_{k})\in\Phi$ si y sólo si $\g{I}_{\Phi}\models p(t_{1},\cdots, t_{k})\in\Phi$.
+      \end{itemize}
+  \end{proof}
+\end{lemma}
+
+
+Ahora podemos demostrar el resultado que buscamos.
+\begin{theorem}
+  Sea $S$ una asignatura y $\Phi\subseteq\form{S}$ un conjunto de fórmulas de Hintikka, entonces $\g{I}_{\Phi}\models\Phi$.
+  \begin{proof}
+    Sea $\varphi\in\Phi$, probaremos $\g{I}_{\Phi}\models\varphi$ por inducción sobre $\Vert\varphi\Vert$.
+    \begin{description}
+    \item[$\Vert\varphi\Vert=0$] Es una de las implicaciones del lema~\ref{le:casobase}.
+    \item[$\Vert\varphi\Vert>0$] En ese caso tenemos varias opciones
+      \begin{itemize}
+      \item $\varphi=\alpha$ es una $\alpha$-fórmula. Al ser $\Phi$ un conjunto $\alpha$-saturado, tenemos $\alpha_{1},\alpha_{2}\in\Phi$. Puesto que $\Vert\alpha\Vert >\Vert\alpha_{1}\Vert$ y $\Vert\alpha\Vert>\Vert\alpha_{2}\Vert$ podemos aplicar hipótesis de inducción y tenemos $\g{I}_{\Phi}\models\alpha_{1}$ y $\g{I}_{\Phi}\models\alpha_{2}$. Puesto que $\varphi=\alpha\sim\alpha_{1}\wedge\alpha_{2}$ tenemos $\g{I}_{\Phi}\models\varphi$.
+	\item $\varphi=\beta$ es una $\beta$-fórmula. 
+      \item $\varphi=\sigma$ es una $\sigma$-fórmula. \textit{(Se deja como ejercicio)}
+      \item $\varphi=\gamma$ es una $\gamma$-fórmula.
+        Hay 2 casos
+        \begin{itemize}
+        \item $\varphi=\forall x\,\psi$. \textit{(Se deja como ejercicio)}
+        \item $\varphi=\neg\exists x\,\psi$.
+          Puesto que $\Phi$ es saturado tenemos que para todo
+          término $t\in T_{\Phi}$ se verifica $\neg\psi[t/x]\in\Phi$. Por otro lado
+          \[ \Vert\neg\forall x\,\psi\Vert = 2+\Vert\psi\Vert =
+            1+\Vert\neg\psi\Vert > \Vert\neg\psi\Vert = \Vert\neg\psi[t/x]\Vert \]
+        \end{itemize}
+        Por podemos aplicar inducción a los términos $\neg\psi[t/x]$para $t\in T_{\Phi}$. Por lo que podemos decir que para cada $t\in T_{\Phi}$ tenemos $\g{I}_{\Phi}\models \neg\psi[t/x]$ y, aplicando el lema de sustitución, tenemos $\g{I}_{\Phi}[t^{\g{I}_{\Phi}}/x]\models \neg\psi$. Puesto que $t^{\g{I}_{\Phi}}=[t]$, tenemos que para cada $[t]\in T_{\Phi}/\equiv_{\Phi}$ se verifica$\g{I}_{\Phi}[[t]/x]\models \neg\psi$. Puesto que cada elemento de $t\in T_{\Phi}$ está en una y solo una clase de equivalencia, podemos decir que para cada $a\in T_{\Phi}/\equiv_{\Phi}$ se verifica $\g{I}_{\Phi}[a/x]\models \neg\psi]$, que es la definición de que $\g{I}_{\Phi}\models\forall x\,\neg\psi$. Puesto que $\forall x\,\neg\psi\sim\neg\exists x\,\psi$ tenemos el resultado
+      \item $\varphi=\delta$ es una $\delta$-fórmula. \textit{(Se deja como ejercicio)}
+      \end{itemize}
+    \end{description}
+  \end{proof}
+\end{theorem}
